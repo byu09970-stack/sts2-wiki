@@ -23,16 +23,12 @@ export default function RootLayout({
               </h1>
             </a>
             <nav className="flex items-center gap-1 ml-2">
-              <a href="/" className="text-xs px-3 py-1.5 rounded transition-colors hover:opacity-80"
-                style={{ color: "#9aa0a8", border: "1px solid transparent" }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2a3050")}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "transparent")}>
+              <a href="/" className="text-xs px-3 py-1.5 rounded transition-colors hover:opacity-80 hover:border-slate-600"
+                style={{ color: "#9aa0a8", border: "1px solid transparent" }}>
                 👹 敵一覧
               </a>
-              <a href="/patch-notes" className="text-xs px-3 py-1.5 rounded transition-colors hover:opacity-80"
-                style={{ color: "#9aa0a8", border: "1px solid transparent" }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2a3050")}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "transparent")}>
+              <a href="/patch-notes" className="text-xs px-3 py-1.5 rounded transition-colors hover:opacity-80 hover:border-slate-600"
+                style={{ color: "#9aa0a8", border: "1px solid transparent" }}>
                 📋 パッチノート
               </a>
             </nav>
