@@ -1,0 +1,269 @@
+{
+  "last_updated": "2026-03-29T00:00:00Z",
+  "patch_notes": [
+    {
+      "gid": "1828441623103381",
+      "version": "v0.101.0",
+      "title": "Beta Patch Notes - v0.101.0",
+      "title_ja": "ベータパッチノート - v0.101.0",
+      "date": "2026-03-23",
+      "date_unix": 1774578272,
+      "is_beta": true,
+      "summary_ja": "サイレントのPrepared・ネクロバインダーのCapture Spirit/Borrowed Timeを以前の形に戻すリバート、リージェントのArsenalカード大幅リワーク、Pendulemレリックリワーク、ドアメーカーボスの完全リデザイン、マップ生成改善（6F序盤にエリートが出にくくなる）など。フィードバック文字数上限が8000文字に拡大。",
+      "sections": [
+        {
+          "heading": "デザイナーノート",
+          "items": [
+            "このベータパッチの変更は実験的なものです。確定ではなく、フィードバックをお待ちしています（ゲーム内F2キーで送信可能）。"
+          ]
+        },
+        {
+          "heading": "リバート・調整",
+          "items": [
+            "Prepared（サイレント）: 以前の形に戻す",
+            "Capture Spirit（ネクロバインダー）: 以前の形に戻す",
+            "Borrowed Time（ネクロバインダー）: 以前の形に戻す"
+          ]
+        },
+        {
+          "heading": "カードリワーク",
+          "items": [
+            "Arsenal（リージェント）: 大幅リワーク",
+            "Pendulum（レリック）: リワーク"
+          ]
+        },
+        {
+          "heading": "ボスリワーク",
+          "items": [
+            "Doormaker（ドアメーカー）: 各フェーズ固有のパワーを持つ形に完全リデザイン"
+          ]
+        },
+        {
+          "heading": "マップ改善",
+          "items": [
+            "6フロア目序盤にエリートが出現しにくくなるよう生成ロジックを改善"
+          ]
+        },
+        {
+          "heading": "バランス調整",
+          "items": [
+            "Serpent Form、Falling Starをバフ",
+            "複数のリージェントカードをバフ",
+            "Voltaicをナーフ",
+            "レリックのレアリティを複数変更",
+            "Skulking Colony・Waterfall Giantのエンカウンター調整"
+          ]
+        },
+        {
+          "heading": "その他",
+          "items": [
+            "フィードバックの文字数上限を16倍の8000文字に拡大",
+            "バグ修正: エクスプロイト、クラッシュ、ソフトロック多数対応"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1828441623103381"
+    },
+    {
+      "gid": "1827626365756213",
+      "version": "v0.100.0",
+      "title": "Beta Patch Notes - v0.100.0",
+      "title_ja": "ベータパッチノート - v0.100.0（フォビアモード追加）",
+      "date": "2026-03-16",
+      "date_unix": 1773971095,
+      "is_beta": true,
+      "summary_ja": "リリース後初の大型パッチ。無限コンボを成立しにくくすることを主目的としたバランス大幅調整。フォビアモード（代替グラフィック）追加。レリックショップ価格25G引き下げ、金生成レリックのショップ出現抑制、カード大幅リワーク多数。",
+      "sections": [
+        {
+          "heading": "新機能",
+          "items": [
+            "フォビアモード（Phobia Mode）: 苦手な視覚表現を代替グラフィックに変更可能",
+            "チェスト前でレリックをスキップできるUI追加",
+            "マップ描画トグルUI追加"
+          ]
+        },
+        {
+          "heading": "バランス方針",
+          "items": [
+            "無限コンボを成立しにくくすることを主目的としたバランスパス",
+            "グルームアセンション（Gloom Ascension）を追加: ？ルームに影響"
+          ]
+        },
+        {
+          "heading": "ショップ調整",
+          "items": [
+            "レリックショップの価格を25G引き下げ",
+            "金生成レリックがショップに出現しないよう変更"
+          ]
+        },
+        {
+          "heading": "カードリワーク",
+          "items": [
+            "Dominate、Expect a Fight、Spite、Stoke、Prepared、Glow、Hidden Gemをリワーク",
+            "Neowブレスの新規追加"
+          ]
+        },
+        {
+          "heading": "エネミーリワーク",
+          "items": [
+            "複数エネミーのリワーク・調整"
+          ]
+        },
+        {
+          "heading": "バグ修正",
+          "items": [
+            "致命的エラー、クラッシュ、ソフトロック多数修正",
+            "マルチプレイヤー同期問題を修正"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1827626365756213"
+    },
+    {
+      "gid": "1826992588605130",
+      "version": "v0.99.1",
+      "title": "Patch Notes - v0.99.1",
+      "title_ja": "パッチノート - v0.99.1",
+      "date": "2026-03-13",
+      "date_unix": 1773780939,
+      "is_beta": false,
+      "summary_ja": "ベータブランチの変更をメインブランチに適用。HP上限追加（999,999,999）、ポートレートアート追加、バグ修正多数（コントローラー入力、クラウドセーブクラッシュ、ソフトロック、日本語を含む各言語のローカライズ修正）。",
+      "sections": [
+        {
+          "heading": "追加・変更",
+          "items": [
+            "HP上限を999,999,999に設定",
+            "新規ポートレートアート追加"
+          ]
+        },
+        {
+          "heading": "バグ修正",
+          "items": [
+            "コントローラー入力の問題を修正",
+            "クラウドセーブ時のクラッシュを修正",
+            "カード選択・オートプレイ時のソフトロックを修正",
+            "日本語・トルコ語・ロシア語・中国語・ドイツ語・スペイン語・ポーランド語・韓国語のローカライズ修正"
+          ]
+        },
+        {
+          "heading": "MOD対応",
+          "items": [
+            "mod_manifest.jsonをPCKファイル外に移動（MOD構造の改善）"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826992588605130"
+    },
+    {
+      "gid": "1826992588597319",
+      "version": "v0.99.1-hotfix-beta",
+      "title": "Beta Hotfix Patch Notes - v0.99.1",
+      "title_ja": "ベータホットフィックス - v0.99.1",
+      "date": "2026-03-10",
+      "date_unix": 1773464180,
+      "is_beta": true,
+      "summary_ja": "ベータブランチ向け緊急修正。マルチプレイヤーでBreakthroughカードの自傷HP減少による死亡時のソフトロック、Architectイベント終了時のソフトロックを修正。",
+      "sections": [
+        {
+          "heading": "バグ修正",
+          "items": [
+            "マルチプレイヤーでBreakthroughカードの自傷ダメージで死亡した際のソフトロックを修正",
+            "Architectイベント終了時のソフトロックを修正"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826992588597319"
+    },
+    {
+      "gid": "1826992588594229",
+      "version": "v0.99",
+      "title": "Beta Patch Notes - v0.99",
+      "title_ja": "ベータパッチノート - v0.99",
+      "date": "2026-03-09",
+      "date_unix": 1773362552,
+      "is_beta": true,
+      "summary_ja": "リリース1週間後パッチ。公開ベータブランチ開設。HP値の上限設定、ポートレートアート追加、バグ修正多数。",
+      "sections": [
+        {
+          "heading": "新機能",
+          "items": [
+            "公開ベータブランチ開設",
+            "HP値に上限を設定"
+          ]
+        },
+        {
+          "heading": "追加",
+          "items": [
+            "ポートレートアート追加"
+          ]
+        },
+        {
+          "heading": "バグ修正",
+          "items": [
+            "各種バグ修正多数"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826992588594229"
+    },
+    {
+      "gid": "1826362059933658",
+      "version": "v0.98.3",
+      "title": "Hotfix Patch Notes - v0.98.3",
+      "title_ja": "ホットフィックス - v0.98.3",
+      "date": "2026-03-07",
+      "date_unix": 1773165305,
+      "is_beta": false,
+      "summary_ja": "タイムラインでのソフトロックを修正する小規模ホットフィックス。",
+      "sections": [
+        {
+          "heading": "バグ修正",
+          "items": [
+            "タイムラインでのソフトロックを修正"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826362059933658"
+    },
+    {
+      "gid": "1826362059925994",
+      "version": "v0.98.2",
+      "title": "Hotfix Patch Notes - v0.98.2",
+      "title_ja": "ホットフィックス - v0.98.2（リリース翌日修正）",
+      "date": "2026-03-04",
+      "date_unix": 1772851665,
+      "is_beta": false,
+      "summary_ja": "リリース翌日のホットフィックス。ブラックスクリーンクラッシュ、ソフトロック、マルチプレイヤーの状態非同期問題を修正。",
+      "sections": [
+        {
+          "heading": "バグ修正",
+          "items": [
+            "ブラックスクリーンクラッシュを修正",
+            "各種ソフトロックを修正",
+            "マルチプレイヤーの状態非同期問題を修正"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826362059925994"
+    },
+    {
+      "gid": "1826362059922807",
+      "version": "v0.98.1",
+      "title": "Hotfix Patch Notes - v0.98.1",
+      "title_ja": "ホットフィックス - v0.98.1（リリース当日修正）",
+      "date": "2026-03-03",
+      "date_unix": 1772758585,
+      "is_beta": false,
+      "summary_ja": "リリース当日のホットフィックス。ゲーム内F2フィードバックで報告されたクラッシュ・ソフトロックを修正。",
+      "sections": [
+        {
+          "heading": "バグ修正",
+          "items": [
+            "プレイヤーからのF2フィードバックをもとにクラッシュ・ソフトロックを修正"
+          ]
+        }
+      ],
+      "url": "https://store.steampowered.com/news/app/2868840/view/1826362059922807"
+    }
+  ]
+}
