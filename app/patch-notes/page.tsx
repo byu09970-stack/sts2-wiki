@@ -46,14 +46,12 @@ export default function PatchNotesPage() {
           <Link
             key={note.gid}
             href={`/patch-notes/${encodeURIComponent(note.version)}`}
-            className="block rounded-lg p-4 transition-colors"
+            className="block rounded-lg p-4 transition-colors patch-note-card"
             style={{
               backgroundColor: "#0d1117",
               border: "1px solid #2a3050",
               textDecoration: "none",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#d4a44a66")}
-            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a3050")}
           >
             <div className="flex items-start gap-3">
               <div className="flex-1 min-w-0">

@@ -76,3 +76,8 @@ textarea {
 .fade-in {
   animation: fadeIn 0.2s ease-out;
 }
+
+/* パッチノートカードのホバー */
+.patch-note-card:hover {
+  border-color: #d4a44a66 !important;
+}
