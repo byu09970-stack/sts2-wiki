@@ -1,0 +1,3649 @@
+{
+  "biomeMeta": {
+    "act1a": {
+      "label": "繁茂の地",
+      "weakPoolCount": 3,
+      "normalPoolFrom": 4
+    },
+    "act1b": {
+      "label": "地下水路",
+      "weakPoolCount": 3,
+      "normalPoolFrom": 4
+    },
+    "act2": {
+      "label": "魔窟",
+      "weakPoolCount": 2,
+      "normalPoolFrom": 3
+    },
+    "act3": {
+      "label": "栄光の路",
+      "weakPoolCount": 2,
+      "normalPoolFrom": 3
+    }
+  },
+  "enemies": [
+    {
+      "id": "vantom",
+      "name": "ヴァントム",
+      "nameEn": "Vantom",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "boss",
+      "hp": "173",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Vantom.png",
+      "abilities": [
+        {
+          "name": "滑る（スリップ）",
+          "description": "次にヴァントムがHPを失う時、代わりにHPを1だけ失う。戦闘開始時に9スタック。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（1T〜4Tループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "7"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "2連撃",
+              "damage": "6×2"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃+汚染",
+              "effect": "攻撃＋「負傷」を3枚捨て札に混ぜる",
+              "damage": "27"
+            },
+            {
+              "turn": "4",
+              "action": "バフ",
+              "effect": "筋力+2",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "「滑る」を9回分持っているので、まず9回ダメージを当てる必要あり。多段攻撃が有効。4ターン毎に筋力+2で火力増加するので長期戦は不利。負傷によるデッキ汚染にも注意。"
+    },
+    {
+      "id": "ceremonial-beast",
+      "name": "儀式の獣",
+      "nameEn": "Ceremonial Beast",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "boss",
+      "hp": "252",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Ceremonial_Beast.png",
+      "abilities": [
+        {
+          "name": "すき込み",
+          "description": "HP150以下になった時、スタン＆筋力を全て喪失する。"
+        },
+        {
+          "name": "耳鳴り",
+          "description": "1ターンに1枚しかカードをプレイできない。HP150以下後に3ターン周期で使用。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "前半（HP150以上）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "バフ",
+              "effect": "すき込みバフ（毎ターン筋力+2の準備）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋筋力+2",
+              "damage": "18"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋筋力+2",
+              "damage": "20"
+            },
+            {
+              "turn": "4",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋筋力+2",
+              "damage": "22"
+            }
+          ]
+        },
+        {
+          "name": "後半（HP150以下、スタン後）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "デバフ",
+              "effect": "耳鳴り付与（手札1枚制限）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "15"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋筋力+3",
+              "damage": "16"
+            }
+          ]
+        }
+      ],
+      "tips": "HP150を切るとスタン＆筋力リセット。後半は「耳鳴り」（1枚制限）に備えて、1枚で大量ブロックを出せるカードがあると安心。1枚で攻防できるカード構成を意識する。"
+    },
+    {
+      "id": "kin-priest",
+      "name": "血族の司祭",
+      "nameEn": "Kin Priest",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "boss",
+      "hp": "190",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Kin_Priest.png",
+      "abilities": [
+        {
+          "name": "群れの絆",
+          "description": "司祭を倒すとミニオン（信者2体）が逃走する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "トリオ戦（司祭+信者2体）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃+デバフ",
+              "effect": "攻撃＋脆弱1付与",
+              "damage": "8"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃+デバフ",
+              "effect": "攻撃＋脱力1付与",
+              "damage": "8"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃",
+              "effect": "3連撃",
+              "damage": "3×3"
+            },
+            {
+              "turn": "4",
+              "action": "バフ",
+              "effect": "筋力+2",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "信者HP：58〜59。基本は信者から処理。全体攻撃があると楽。司祭を先に倒しても信者が逃げるだけなので、ダメージ優先なら司祭を先に狙うのもあり。"
+    },
+    {
+      "id": "bygone-effigy",
+      "name": "古の偶像",
+      "nameEn": "Bygone Effigy",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "elite",
+      "hp": "127",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Bygone_Effigy.png",
+      "abilities": [
+        {
+          "name": "スロウ",
+          "description": "カードをプレイする度に受けるダメージが10%増加する。スタックは戦闘中ずっと蓄積。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "睡眠",
+              "effect": "何もしない",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "バフ",
+              "effect": "筋力+10",
+              "damage": "-"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃",
+              "effect": "高火力単体攻撃",
+              "damage": "25"
+            },
+            {
+              "turn": "4",
+              "action": "攻撃",
+              "effect": "高火力単体攻撃",
+              "damage": "25"
+            }
+          ]
+        }
+      ],
+      "tips": "速攻必須。3T目までに倒したい。スロウのスタックが溜まると後半急激にダメージが増加する。2T目の筋力バフ前（1T目の睡眠中）に大ダメージを入れるのがベスト。"
+    },
+    {
+      "id": "byrdonis",
+      "name": "ビャードニス",
+      "nameEn": "Byrdonis",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "elite",
+      "hp": "93",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Byrdonis.png",
+      "abilities": [
+        {
+          "name": "縄張り意識",
+          "description": "毎ターン終了時、筋力+1。スタックし続けるため長期戦ほど強くなる。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（ループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "16"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "3連撃",
+              "damage": "4×3"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "18"
+            },
+            {
+              "turn": "4",
+              "action": "攻撃",
+              "effect": "3連撃",
+              "damage": "6×3"
+            }
+          ]
+        }
+      ],
+      "tips": "筋力スケーリングするので早めに倒す。長期戦は不利。筋力低下カードがあると安定する。"
+    },
+    {
+      "id": "phrog-parasite",
+      "name": "寄生カエル",
+      "nameEn": "Phrog Parasite",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "elite",
+      "hp": "61",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Phrog_Parasite.png",
+      "abilities": [
+        {
+          "name": "寄生",
+          "description": "倒されるとリグラー4体（HP17〜21）がスタン状態で出現する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "デッキ汚染",
+              "effect": "「感染」カードを3枚捨て札に混入",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "4連撃",
+              "damage": "4×4"
+            },
+            {
+              "turn": "3",
+              "action": "デッキ汚染",
+              "effect": "「感染」カードを3枚混入",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "倒した後にリグラー4体が出現するのでブロックを確保しておく。「感染」カードのデッキ汚染を最小限にするために速攻を心がける。"
+    },
+    {
+      "id": "cubex-construct",
+      "name": "キューベックス構造体",
+      "nameEn": "Cubex Construct",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "65 (A8: 70)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Cubex_Construct.png",
+      "abilities": [
+        {
+          "name": "ブロック13",
+          "description": "戦闘開始時に13ブロックを持つ"
+        },
+        {
+          "name": "アーティファクト1",
+          "description": "最初のデバフを1回無効化する"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常パターン（チャージ→2×リピーターブラスト→エクスペルブラスト→サブマージループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "チャージアップ",
+              "effect": "筋力+2",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "リピーターブラスト",
+              "effect": "攻撃＋筋力+2",
+              "damage": "7 (A8:8-9)"
+            },
+            {
+              "turn": "3",
+              "action": "リピーターブラスト",
+              "effect": "攻撃＋筋力+2",
+              "damage": "7 (A8:8-9)"
+            },
+            {
+              "turn": "4",
+              "action": "エクスペルブラスト",
+              "effect": "2連攻撃",
+              "damage": "5×2 (A8:6-9×2)"
+            },
+            {
+              "turn": "5",
+              "action": "サブマージ",
+              "effect": "ブロック+15",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "最初のターンでチャージアップして筋力+2。その後2回リピーターブラスト（それぞれ筋力+2）で計6筋力蓄積。エクスペルブラストは2ヒットなので筋力の影響を2倍受ける。アーティファクトで最初のデバフは無効。長期戦は危険。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "fogmog",
+      "name": "フォグモグ",
+      "nameEn": "Fogmog",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "74 (A8: 78)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Fogmog.png",
+      "abilities": [
+        {
+          "name": "幻覚の胞子（イリュージョリースポアーズ）",
+          "description": "戦闘開始時にEye With Teeth（HP6 / A8:8、毎ターンDazed×3を捨て札に追加）を召喚する"
+        },
+        {
+          "name": "Eye With Teeth: イリュージョン",
+          "description": "Eye With Teethは倒されると次のターンに全HP回復して復活する"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定→ランダム",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "幻覚の胞子",
+              "effect": "Eye With Teeth召喚",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "サワック",
+              "effect": "攻撃＋筋力+1",
+              "damage": "8 (A8:9)"
+            },
+            {
+              "turn": "サワック後は必ずヘッドバット、ヘッドバット後は必ずサワック",
+              "action": "サワック↔ヘッドバット交互",
+              "effect": "",
+              "damage": "8 or 14 (A8:9/16)"
+            }
+          ]
+        }
+      ],
+      "tips": "Eye With Teethは復活するためFogmog本体を優先して倒す。DazedカードがデッキをE詰まらせる。筋力が蓄積するため早期決着が重要。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "fuzzy-wurm-crawler",
+      "name": "ファジーワーム・クローラー",
+      "nameEn": "Fuzzy Wurm Crawler",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "55-57 (A8: 58-59)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Fuzzy_Wurm_Crawler.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "アシッドグープ",
+              "effect": "単体攻撃",
+              "damage": "4 (A8:6)"
+            },
+            {
+              "turn": "2",
+              "action": "インヘール",
+              "effect": "筋力+7",
+              "damage": "-"
+            },
+            {
+              "turn": "3",
+              "action": "アシッドグープ（筋力+7後）",
+              "effect": "増強された単体攻撃",
+              "damage": "4+7=11+以降増加"
+            }
+          ]
+        }
+      ],
+      "tips": "インヘールで筋力+7を繰り返すため、長期戦は非常に危険。筋力は永続的に蓄積するので毎ループごとにダメージが増加し続ける。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "inklets",
+      "name": "インクレッツ",
+      "nameEn": "Inklets",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "11-17 (A8: 12-18) ×3体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Inklet.png",
+      "abilities": [
+        {
+          "name": "スリッパリー1",
+          "description": "最初にHPを失う時、代わりに1HPしか失わない（1スタック）"
+        }
+      ],
+      "phases": [
+        {
+          "name": "グループ戦（3体、各異なる開始行動）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "外側:ジャブ or ウインドアップパンチ / 中央:ウインドアップパンチ必須",
+              "effect": "",
+              "damage": "3 or 2×3 (A8:4/3×3)"
+            },
+            {
+              "turn": "以降",
+              "action": "ジャブ↔ピアシングゲイズ/ウインドアップパンチ交互",
+              "effect": "ジャブ後はランダムで強攻撃、強攻撃後は必ずジャブ",
+              "damage": "3 or 2×3 or 10 (A8:4/3×3/11)"
+            }
+          ]
+        }
+      ],
+      "tips": "スリッパリーで1体あたり最低2撃必要。ピアシングゲイズ（10ダメ）はジャブの後に来るので予測可能。多段攻撃カードが有効。3体いるためAoE攻撃が効率的。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "mawler",
+      "name": "モーラー",
+      "nameEn": "Mawler",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "72 (A8: 76)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Mawler.png",
+      "abilities": [
+        {
+          "name": "ローアー（1回限り）",
+          "description": "脆弱×3を付与する（戦闘中1回のみ使用）"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常パターン",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "クロー",
+              "effect": "2連攻撃（必ず初手）",
+              "damage": "4×2 (A9:5×2)"
+            },
+            {
+              "turn": "以降",
+              "action": "リップアンドティア/ローアー/クロー 均等確率ランダム（連続不可）",
+              "effect": "ローアーは1回のみ",
+              "damage": "14 or - or 4×2"
+            }
+          ]
+        }
+      ],
+      "tips": "必ず初手はクロー。ローアーは一度使うと以降はリップアンドティアとクローのみ。ローアー使用後の脆弱（被ダメ50%増）に注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "nibbit",
+      "name": "ニビット",
+      "nameEn": "Nibbit",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "42-46 (A8: 44-48)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Nibbit.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "ソロ（弱）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "バット",
+              "effect": "単体攻撃",
+              "damage": "12 (A8:13)"
+            },
+            {
+              "turn": "以降",
+              "action": "バット/ヘジタントスライス/ヒス循環",
+              "effect": "ヘジタントスライス:攻撃+ブロック+5 / ヒス:筋力+2",
+              "damage": "12 or 6 or -"
+            }
+          ]
+        },
+        {
+          "name": "ペア（通常）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "前衛:ヘジタントスライス / 後衛:ヒス",
+              "effect": "ずれたサイクルで開始",
+              "damage": "6 or -"
+            },
+            {
+              "turn": "以降",
+              "action": "バット→ヘジタントスライス→ヒス繰り返し",
+              "effect": "2体が交互に行動",
+              "damage": "12 or 6 or -"
+            }
+          ]
+        }
+      ],
+      "tips": "ヒスで筋力+2が蓄積し続けるため長期戦は危険。ペア戦では2体がサイクルをずらして行動する。早期決着を目指す。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "nibbit-duo",
+      "name": "ニビット（2体）",
+      "nameEn": "Nibbit Duo",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "42-46 (A8: 44-48) ×2体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Nibbit.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "2体同時（Nibbit参照）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "前衛:ヘジタントスライス（攻撃6+ブロック+5）/ 後衛:ヒス（筋力+2）",
+              "effect": "サイクルがずれた状態で開始",
+              "damage": "6 or -"
+            },
+            {
+              "turn": "以降",
+              "action": "バット→ヘジタントスライス→ヒス繰り返し",
+              "effect": "2体交互",
+              "damage": "12 or 6 or -"
+            }
+          ]
+        }
+      ],
+      "tips": "2体のNibbitが異なるフェーズで行動。ヒスの筋力蓄積で危険度が増す。1体ずつ素早く倒すこと。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "raider-trio",
+      "name": "レイダー三人組",
+      "nameEn": "Raider Trio",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "アサシン18-23 / アックス20-22 / ブルート30-33 / クロスボウ18-21 / トラッカー21-25 (A8各+1-2)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Axe_Raider.png",
+      "abilities": [
+        {
+          "name": "ルビーレイダーズ（5種からランダム3体）",
+          "description": "アサシン、アックス、ブルート、クロスボウ、トラッカーから重複なし3体選択"
+        }
+      ],
+      "phases": [
+        {
+          "name": "アックスレイダー",
+          "moves": [
+            {
+              "turn": "1,2",
+              "action": "スウィング",
+              "effect": "攻撃＋ブロック+5",
+              "damage": "5 (A8:6)"
+            },
+            {
+              "turn": "3以降",
+              "action": "スウィング×2→ビッグスウィング繰り返し",
+              "effect": "",
+              "damage": "12 (A8:13)"
+            }
+          ]
+        },
+        {
+          "name": "アサシンレイダー",
+          "moves": [
+            {
+              "turn": "毎ターン",
+              "action": "キルショット",
+              "effect": "単体攻撃（毎ターン）",
+              "damage": "11 (A8:12)"
+            }
+          ]
+        },
+        {
+          "name": "ブルートレイダー",
+          "moves": [
+            {
+              "turn": "奇数",
+              "action": "ビート",
+              "effect": "単体攻撃",
+              "damage": "7 (A8:8)"
+            },
+            {
+              "turn": "偶数",
+              "action": "クラップ",
+              "effect": "筋力+3",
+              "damage": "-"
+            }
+          ]
+        },
+        {
+          "name": "クロスボウレイダー",
+          "moves": [
+            {
+              "turn": "奇数",
+              "action": "リロード",
+              "effect": "ブロック+3",
+              "damage": "-"
+            },
+            {
+              "turn": "偶数",
+              "action": "ファイア！",
+              "effect": "強攻撃",
+              "damage": "14 (A8:16)"
+            }
+          ]
+        },
+        {
+          "name": "トラッカーレイダー",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "トラック",
+              "effect": "脆弱×2付与",
+              "damage": "-"
+            },
+            {
+              "turn": "2以降",
+              "action": "アンリーシュザハウンズ",
+              "effect": "8連攻撃（9連A8）",
+              "damage": "1×8 (A8:1×9)"
+            }
+          ]
+        }
+      ],
+      "tips": "トラッカーは初手で脆弱を付与するので優先度高。ブルートは筋力が蓄積する。クロスボウは1ターンおきしか攻撃しない。毎回3体がランダム選択される。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "shrinker-beetle",
+      "name": "シュリンカービートル",
+      "nameEn": "Shrinker Beetle",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "38-40 (A8: 40-42)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Shrinker_Beetle.png",
+      "abilities": [
+        {
+          "name": "シュリンク",
+          "description": "攻撃ダメージが30%減少する。倒されると解除。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定パターン",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "シュリンカー",
+              "effect": "シュリンクデバフ付与（攻撃ダメ-30%）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "チョンプ",
+              "effect": "単体攻撃",
+              "damage": "7 (A8:8-9)"
+            },
+            {
+              "turn": "3",
+              "action": "ストンプ",
+              "effect": "強攻撃",
+              "damage": "13 (A8:14-15)"
+            },
+            {
+              "turn": "以降",
+              "action": "チョンプ↔ストンプ交互",
+              "effect": "",
+              "damage": "7 or 13"
+            }
+          ]
+        }
+      ],
+      "tips": "初手でシュリンク（攻撃ダメ30%減）を付与してくる。倒すとデバフ解除。デバフ中は攻撃の効率が落ちるため早期撃破が重要。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "slime-pack",
+      "name": "スライムの群れ",
+      "nameEn": "Slime Pack",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "リーフスライム(M)32-35 + リーフスライム(S)×2 11-15 または ツイッグスライム(M)26-28 + S混合 (A8各+1)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Leaf_Slime_%28S%29.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "リーフスライム(M)",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スティッキーショット",
+              "effect": "Slimed×2を捨て札に追加",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "クランプショット↔スティッキーショット交互",
+              "effect": "",
+              "damage": "8 (A8:9) or -"
+            }
+          ]
+        },
+        {
+          "name": "リーフスライム(S)",
+          "moves": [
+            {
+              "turn": "毎ターン",
+              "action": "タックル/グープ ランダム交互（連続不可）",
+              "effect": "グープはSlimed追加",
+              "damage": "3 (A8:4) or -"
+            }
+          ]
+        },
+        {
+          "name": "ツイッグスライム(M)",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スティッキーショット",
+              "effect": "Slimed×1を捨て札に",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "チョンプ(67%)またはスティッキーショット(33%)ランダム（連続スティッキー不可）",
+              "effect": "",
+              "damage": "11 (A8:12) or -"
+            }
+          ]
+        },
+        {
+          "name": "ツイッグスライム(S)",
+          "moves": [
+            {
+              "turn": "毎ターン",
+              "action": "タックル",
+              "effect": "毎ターン攻撃",
+              "damage": "4 (A8:5)"
+            }
+          ]
+        }
+      ],
+      "tips": "Slimedカードがデッキを汚染する。スライムを早く倒してカード汚染を抑えたい。全体攻撃カードが有効。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "slime-trio",
+      "name": "スライムトリオ",
+      "nameEn": "Slime Trio",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "リーフスライム(M)×2 32-35 + リーフスライム(M)×1またはS混合 (A8各+1)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Leaf_Slime_%28S%29.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "混合スライム（各スライムの行動はSlime Pack参照）",
+          "moves": [
+            {
+              "turn": "各スライム",
+              "action": "各スライム参照",
+              "effect": "デッキ汚染含む",
+              "damage": "様々"
+            }
+          ]
+        }
+      ],
+      "tips": "Slime Packより規模が大きいグループ戦。Slimedカード汚染が多くなる。全体攻撃カードがあれば有利。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "vine-shambler",
+      "name": "つる化け",
+      "nameEn": "Vine Shambler",
+      "act": "act1a",
+      "biome": "繁茂の地",
+      "biomeEn": "Overgrowth",
+      "type": "normal",
+      "hp": "61 (A8: 64)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Vine_Shambler.png",
+      "abilities": [
+        {
+          "name": "タングルド",
+          "description": "攻撃カードのコストが2ターン間、無色エネルギー1個分追加でかかる"
+        }
+      ],
+      "phases": [
+        {
+          "name": "4ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スワイプ",
+              "effect": "2連攻撃",
+              "damage": "6×2 (A8:7-9×2)"
+            },
+            {
+              "turn": "2",
+              "action": "グラスピングヴァインズ",
+              "effect": "攻撃＋タングルド×1付与",
+              "damage": "8 (A8:9)"
+            },
+            {
+              "turn": "3",
+              "action": "チョンプ",
+              "effect": "強攻撃",
+              "damage": "16 (A8:18-19)"
+            },
+            {
+              "turn": "4",
+              "action": "スワイプ（ループ再開）",
+              "effect": "",
+              "damage": "6×2"
+            }
+          ]
+        }
+      ],
+      "tips": "グラスピングヴァインズでタングルドを付与してくる（攻撃カードのコスト増加）。エネルギー依存のデッキには特に脅威。チョンプの16ダメは要注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "lagavulin-matriarch",
+      "name": "ラガヴーリン・メイトリアーク",
+      "nameEn": "Lagavulin Matriarch",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "boss",
+      "hp": "222 (A8: 233)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Lagavulin_Matriarch.png",
+      "abilities": [
+        {
+          "name": "プレーティング",
+          "description": "戦闘開始時にプレーティング12を所持した状態で眠っている。覚醒時にプレーティングはすべて消失する。"
+        },
+        {
+          "name": "睡眠",
+          "description": "戦闘開始時は眠り状態。3ターン継続するか、ブロックされていないダメージを受けると覚醒する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "覚醒後（4ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スラッシュ",
+              "effect": "単体攻撃",
+              "damage": "19 (A9: 21)"
+            },
+            {
+              "turn": "2",
+              "action": "ディスエンバウル",
+              "effect": "2連撃",
+              "damage": "9×2 (A9: 10×2)"
+            },
+            {
+              "turn": "3",
+              "action": "スラッシュ2",
+              "effect": "攻撃＋ブロック12獲得",
+              "damage": "12 (A9: 14)"
+            },
+            {
+              "turn": "4",
+              "action": "ソウルサイフォン",
+              "effect": "プレイヤーの筋力・敏捷各-2、自身の筋力+2（永続）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "ソウルサイフォンで毎サイクル筋力と敏捷が永続-2されるため長期戦は危険。Poison・オーブ・状態異常ビルドは筋力/敏捷の影響を受けないので有効。意図的に睡眠中に攻撃して早期覚醒させれば準備ターンを延ばせる（プレーティングも消える）。起床後3ターン目のスラッシュ2はブロック自己強化に注意。"
+    },
+    {
+      "id": "soul-fysh",
+      "name": "ソウルフィッシュ",
+      "nameEn": "Soul Fysh",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "boss",
+      "hp": "211",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Soul_Fysh.png",
+      "abilities": [
+        {
+          "name": "手招き",
+          "description": "山札や捨て札に「手招き」カードを混入する。手札にある状態でターンを終了するとHP6減少。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "デッキ汚染",
+              "effect": "「手招き」を山札1枚＋捨て札1枚混入",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "16"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃+汚染",
+              "effect": "攻撃＋手招き1枚混入",
+              "damage": "7"
+            },
+            {
+              "turn": "4",
+              "action": "霊体",
+              "effect": "霊体2ターン（ダメージ1軽減）",
+              "damage": "-"
+            },
+            {
+              "turn": "5",
+              "action": "攻撃+デバフ",
+              "effect": "攻撃＋弱体3付与",
+              "damage": "11"
+            }
+          ]
+        }
+      ],
+      "tips": "筋力スケーリングなし。手招きカード管理が鍵。エナジーに余裕があれば手招きを使って排除。霊体ターンは攻撃を控える。"
+    },
+    {
+      "id": "waterfall-giant",
+      "name": "滝の巨人",
+      "nameEn": "Waterfall Giant",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "boss",
+      "hp": "250",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Waterfall_Giant.png",
+      "abilities": [
+        {
+          "name": "蒸気噴出",
+          "description": "死亡時に蓄積した蒸気噴出ダメージを爆発させる。初期値15、毎ターン+3ずつ増加。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "バフ",
+              "effect": "蒸気噴出15スタック獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃+デバフ+バフ",
+              "effect": "攻撃＋脱力1＋蒸気+3",
+              "damage": "15"
+            },
+            {
+              "turn": "3",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋蒸気+3",
+              "damage": "10"
+            },
+            {
+              "turn": "4",
+              "action": "回復+バフ",
+              "effect": "HP15回復＋蒸気+3",
+              "damage": "-"
+            },
+            {
+              "turn": "5",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋蒸気+3",
+              "damage": "20"
+            },
+            {
+              "turn": "6",
+              "action": "攻撃+バフ",
+              "effect": "攻撃＋蒸気+3",
+              "damage": "13"
+            }
+          ]
+        }
+      ],
+      "tips": "倒した後の蒸気噴出ダメージに備えてブロック/HP確保が必須。山札確認して防御札を引けるタイミングで倒す。長引くほど死亡時ダメージが増加するので注意。"
+    },
+    {
+      "id": "phantasmal-gardener",
+      "name": "幻影蟲",
+      "nameEn": "Phantasmal Gardener",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "elite",
+      "hp": "28〜32×複数",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Phantasmal_Gardener.png",
+      "abilities": [
+        {
+          "name": "臆病",
+          "description": "毎ターン最初に攻撃を受けた時、ブロック6を獲得する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "複数体の行動（1Tずれ）",
+          "moves": [
+            {
+              "turn": "各自1T目",
+              "action": "攻撃",
+              "effect": "多段攻撃",
+              "damage": "複数ヒット"
+            },
+            {
+              "turn": "各自2T目",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "5"
+            },
+            {
+              "turn": "各自3T目",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "7"
+            },
+            {
+              "turn": "各自4T目",
+              "action": "バフ",
+              "effect": "バフ",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "多段攻撃で臆病のブロックを処理してから本命ダメージを入れる。1Tずれで行動するため、ターンをまたいでも全体攻撃があれば安定する。"
+    },
+    {
+      "id": "skulking-colony",
+      "name": "蠢く群生体",
+      "nameEn": "Skulking Colony",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "elite",
+      "hp": "79",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Skulking_Colony.png",
+      "abilities": [
+        {
+          "name": "硬い殻",
+          "description": "1ターンに20以上のHP減少が不可能。どれだけ攻撃しても1ターンに20ダメージまでしか与えられない。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃+デッキ汚染",
+              "effect": "攻撃＋「めまい」4枚山札混入",
+              "damage": "9"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "16"
+            },
+            {
+              "turn": "3",
+              "action": "ブロック+バフ",
+              "effect": "ブロック10＋筋力+3",
+              "damage": "-"
+            },
+            {
+              "turn": "4",
+              "action": "攻撃",
+              "effect": "2連撃",
+              "damage": "9×2"
+            }
+          ]
+        }
+      ],
+      "tips": "最速4ターンで撃破（毎ターン20ダメージ×4=80）。安定したダメージソースで確実に削る。めまいカードによるデッキ汚染が厄介。"
+    },
+    {
+      "id": "terror-eel",
+      "name": "テラーウツボ",
+      "nameEn": "Terror Eel",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "elite",
+      "hp": "140",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Terror_Eel.png",
+      "abilities": [
+        {
+          "name": "悲鳴",
+          "description": "初めてHP70以下になった時、スタン状態になる。その後、弱体99を付与して火力が激増する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "前半（HP70以上）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "17"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃+バフ",
+              "effect": "3連撃＋活力7獲得",
+              "damage": "3×3"
+            }
+          ]
+        },
+        {
+          "name": "後半（HP70以下、スタン後）",
+          "moves": [
+            {
+              "turn": "スタン解除",
+              "action": "デバフ",
+              "effect": "弱体99付与（高火力化）",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "攻撃",
+              "effect": "弱体込みの高火力攻撃",
+              "damage": "大"
+            }
+          ]
+        }
+      ],
+      "tips": "HP70を割ればスタン。その後弱体99で火力が激増するのでブロック確保が必須。HP70をちょうど割るタイミングを調整するとスムーズ。"
+    },
+    {
+      "id": "corpse-slugs",
+      "name": "死骸ナメクジ",
+      "nameEn": "Corpse Slugs",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "25-27 (A8: 27-29) ×2〜3体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Corpse_Slug.png",
+      "abilities": [
+        {
+          "name": "ラヴィナス",
+          "description": "仲間が死亡した時、即座に食べてスタンし、筋力+4 (A9:+5)を得る"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3ターンループ（各スラグが異なるフェーズで開始）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ウィップスラップ",
+              "effect": "2連攻撃",
+              "damage": "3×2"
+            },
+            {
+              "turn": "2",
+              "action": "グロンプ",
+              "effect": "単体攻撃",
+              "damage": "8 (A9:9)"
+            },
+            {
+              "turn": "3",
+              "action": "グープ",
+              "effect": "脆弱×2付与",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "仲間スラグが死ぬとラヴィナスで筋力+4を得る。一気に全体を倒すか、グープの脆弱デバフに注意。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "cultists",
+      "name": "石を纏った狂信者",
+      "nameEn": "Cultists",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "カルサイファイドカルティスト38-41 (A8:39-42) / ダンプカルティスト51-53 (A8:52-54)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Calcified_Cultist.png",
+      "abilities": [
+        {
+          "name": "リチュアル（インカンテーション）",
+          "description": "インカンテーション使用でリチュアルスタック獲得。毎ターン終了時に筋力+リチュアル値。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "カルサイファイドカルティスト",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "インカンテーション",
+              "effect": "リチュアル+2",
+              "damage": "-"
+            },
+            {
+              "turn": "2以降",
+              "action": "ダークストライク（毎ターン）",
+              "effect": "単体攻撃",
+              "damage": "9 (A8:11)"
+            }
+          ]
+        },
+        {
+          "name": "ダンプカルティスト",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "インカンテーション",
+              "effect": "リチュアル+5 (A8:6)",
+              "damage": "-"
+            },
+            {
+              "turn": "2以降",
+              "action": "ダークストライク（毎ターン）",
+              "effect": "単体攻撃",
+              "damage": "1 (A8:3-9)"
+            }
+          ]
+        }
+      ],
+      "tips": "インカンテーション使用ターンは攻撃しないので攻撃チャンス。リチュアルが蓄積すると毎ターン筋力が増え危険。2体いる場合はダンプカルティスト優先（高リチュアル値）。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "fossil-stalker",
+      "name": "化石ストーカー",
+      "nameEn": "Fossil Stalker",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "51-53 (A8: 54-56)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Fossil_Stalker.png",
+      "abilities": [
+        {
+          "name": "サック3",
+          "description": "無防備な状態（ブロックがない状態）でダメージを受けると筋力+3×スタック数を獲得"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常パターン（必ず初手ラッチ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ラッチ",
+              "effect": "単体攻撃（必ず初手）",
+              "damage": "12 (A8:14)"
+            },
+            {
+              "turn": "以降",
+              "action": "ラッチ/タックル/ラッシュ 均等確率ランダム（連続不可）",
+              "effect": "タックル:脆弱×1付与",
+              "damage": "12 or 9 or 3×2 (A9+)"
+            }
+          ]
+        }
+      ],
+      "tips": "サック能力により無防備ダメージを受けると筋力が増加する雪だるま式強化。全攻撃をブロックすること。タックルは脆弱×1付与で以降のブロック効率が下がる。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "gremlin-merc",
+      "name": "グレムリン傭兵",
+      "nameEn": "Gremlin Merc",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "47-49 (A8: 51-53)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Gremlin_Merc.png",
+      "abilities": [
+        {
+          "name": "サプライズ",
+          "description": "倒された時、ファットグレムリン(13-17HP/A8:14-18)とスニーキーグレムリン(10-14HP/A8:11-15)を召喚"
+        },
+        {
+          "name": "シーヴァリー20",
+          "description": "攻撃のたびにゴールドを盗む"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ギミー",
+              "effect": "2連攻撃＋ゴールド窃盗",
+              "damage": "7×2 (A8:8×2)"
+            },
+            {
+              "turn": "2",
+              "action": "ダブルスマッシュ",
+              "effect": "2連攻撃＋弱体×2＋窃盗",
+              "damage": "6×2 (A8:7×2)"
+            },
+            {
+              "turn": "3",
+              "action": "ヘヘ",
+              "effect": "攻撃＋筋力+2＋窃盗",
+              "damage": "8 (A8:9)"
+            }
+          ]
+        }
+      ],
+      "tips": "倒すと子グレムリン2体が出てくる。ファットグレムリンが盗んだゴールドを持って逃げるので早期撃破が重要。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "haunted-ship",
+      "name": "幽霊船",
+      "nameEn": "Haunted Ship",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "63 (A8: 67)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Haunted_Ship.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "固定初手2ターン→ランダム",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ラミングスピード",
+              "effect": "攻撃＋負傷カード×2を捨て札に",
+              "damage": "10 (A8:11)"
+            },
+            {
+              "turn": "2",
+              "action": "ホーント",
+              "effect": "弱体×2、脆弱×2、脆弱×2付与",
+              "damage": "-"
+            },
+            {
+              "turn": "3以降",
+              "action": "ラミングスピード/スワイプ/ストンプ ランダム（連続不可）",
+              "effect": "",
+              "damage": "10 or 13 or 4×3 (A8+)"
+            }
+          ]
+        }
+      ],
+      "tips": "初手2ターンは固定。ラミングスピードで負傷カードがデッキに入る。ホーントで多重デバフ（弱体+脆弱+脆弱）。3ターン目以降はランダム。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "living-fog",
+      "name": "リビングフォグ",
+      "nameEn": "Living Fog",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "80 (A8: 82)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Living_Fog.png",
+      "abilities": [
+        {
+          "name": "スモッギー",
+          "description": "1ターンにスキルカードを1枚しかプレイできない"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定初手→交互パターン",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "アドバンストガス",
+              "effect": "攻撃＋スモッギー×1付与",
+              "damage": "8 (A8:9)"
+            },
+            {
+              "turn": "2",
+              "action": "ブロート",
+              "effect": "攻撃＋ガスボム×1召喚",
+              "damage": "5 (A8:6-9)"
+            },
+            {
+              "turn": "3",
+              "action": "スーパーガスブラスト",
+              "effect": "単体攻撃",
+              "damage": "8 (A8:9)"
+            },
+            {
+              "turn": "4",
+              "action": "ブロート（×2召喚）",
+              "effect": "以降増加",
+              "damage": "5"
+            },
+            {
+              "turn": "以降",
+              "action": "スーパーガスブラスト↔ブロート交互",
+              "effect": "ブロートのたびにガスボム増加（最大5体）",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "スモッギーデバフでスキル使用を制限。ガスボム（HP10）は毎ターン8ダメ爆発して消える。リーダー（本体）を倒すとミニオン離脱。ガスボムが溜まる前に本体撃破を。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "punch-construct",
+      "name": "パンチ構造体",
+      "nameEn": "Punch Construct",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "55 (A8: 60)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Punch_Construct.png",
+      "abilities": [
+        {
+          "name": "アーティファクト1",
+          "description": "最初のデバフを1回無効化する"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3ターン固定ループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "レディ",
+              "effect": "ブロック+10",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "ストロングパンチ",
+              "effect": "強攻撃",
+              "damage": "14 (A8:16)"
+            },
+            {
+              "turn": "3",
+              "action": "ファストパンチ",
+              "effect": "2連攻撃＋弱体×1",
+              "damage": "5×2 (A8:6×2)"
+            }
+          ]
+        }
+      ],
+      "tips": "行動パターンが固定で予測しやすい。アーティファクトで初回デバフは無効。ファストパンチの弱体に注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "seapunk",
+      "name": "シーパンク",
+      "nameEn": "Seapunk",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "44-46 (A8: 47-49)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Seapunk.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "シーキック",
+              "effect": "単体攻撃",
+              "damage": "11 (A8:12)"
+            },
+            {
+              "turn": "2",
+              "action": "スピニングキック",
+              "effect": "4連攻撃",
+              "damage": "2×4"
+            },
+            {
+              "turn": "3",
+              "action": "バブルバープ",
+              "effect": "ブロック+7＋筋力+1 (A8:ブロック+8, 筋力+2)",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "バブルバープで筋力が蓄積するため長期戦は危険。3ターン固定なので行動予測が容易。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "sewer-clam",
+      "name": "下水道のハマグリ",
+      "nameEn": "Sewer Clam",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "56 (A8: 58)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Sewer_Clam.png",
+      "abilities": [
+        {
+          "name": "プレーティング8 (A8:9)",
+          "description": "ターン終了時にブロック+X（毎ターン-1）を得る"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定パターン（ジェット先手）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ジェット",
+              "effect": "単体攻撃（必ず初手）",
+              "damage": "10 (A9:11)"
+            },
+            {
+              "turn": "2",
+              "action": "プレッシャライズ",
+              "effect": "筋力+4",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "プレッシャライズ↔ジェット交互",
+              "effect": "",
+              "damage": "10+筋力 or -"
+            }
+          ]
+        }
+      ],
+      "tips": "プレーティングで毎ターンブロック獲得。プレッシャライズで筋力+4が蓄積するため長期戦危険。デバフ（弱体）でジェットのダメージを減らすのも有効。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "sludge-spinner",
+      "name": "スラッジスピナー",
+      "nameEn": "Sludge Spinner",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "37-39 (A8: 41-42)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Sludge_Spinner.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "固定初手→ランダム",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "オイルスプレー",
+              "effect": "攻撃＋弱体×1付与（必ず初手）",
+              "damage": "8 (A8:9)"
+            },
+            {
+              "turn": "以降",
+              "action": "オイルスプレー/スラム/レイジ ランダム（連続不可）",
+              "effect": "レイジは筋力+3",
+              "damage": "8 or 11 or 6"
+            }
+          ]
+        }
+      ],
+      "tips": "初手必ずオイルスプレー（弱体付与）。レイジで筋力+3が蓄積する。HPが低めなので早期撃破が容易。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "toadpoles",
+      "name": "トードポールズ",
+      "nameEn": "Toadpoles",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "21-25 (A8: 22-26)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Toadpole.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "3ターンループ（弱版は前列がスパイクン先手）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ワール",
+              "effect": "単体攻撃",
+              "damage": "7 (A8:8)"
+            },
+            {
+              "turn": "2",
+              "action": "スパイクン",
+              "effect": "ソーン+2獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "3",
+              "action": "スパイクスピット",
+              "effect": "3連攻撃＋自身のソーン-2",
+              "damage": "3×3 (A8:4×3)"
+            }
+          ]
+        }
+      ],
+      "tips": "ソーン獲得後スパイクスピットで消費。スパイクン中に攻撃するとこちらがダメージを受ける。3体同時出現もあるため早期撃破推奨。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "two-tailed-rats",
+      "name": "二尾ネズミ",
+      "nameEn": "Two-Tailed Rats",
+      "act": "act1b",
+      "biome": "地下水路",
+      "biomeEn": "Underdocks",
+      "type": "normal",
+      "hp": "17-21 (A8: 18-22) ×3体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Two-Tailed_Rat.png",
+      "abilities": [
+        {
+          "name": "コールフォーバックアップ",
+          "description": "2ターン以上経過後、各ラットが1回限り新しいラットを召喚可能（最大3体追加）"
+        }
+      ],
+      "phases": [
+        {
+          "name": "グループ戦（3体、各異なる開始行動）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "3体が各異なる行動で開始（スクラッチ/ディジーズバイト/スクリーチ）",
+              "effect": "",
+              "damage": "8 or 6 or -"
+            },
+            {
+              "turn": "以降",
+              "action": "スクラッチ/ディジーズバイト/スクリーチ ランダム（連続不可）",
+              "effect": "",
+              "damage": "8 or 6 or -"
+            },
+            {
+              "turn": "2以降(条件)",
+              "action": "コールフォーバックアップ",
+              "effect": "新ラット召喚（各1回、最大3体追加）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "放置すると最大6体まで増える。召喚前に倒せるよう素早く対処。スクリーチの脆弱デバフに注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "kaiser-crab",
+      "name": "クラッシャー＆ロケット",
+      "nameEn": "Kaiser Crab",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "boss",
+      "hp": "〜400（2体合計）",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Kaiser_Crab.png",
+      "abilities": [
+        {
+          "name": "バックアタック",
+          "description": "背後から攻撃された時、ダメージが50%増加する。"
+        },
+        {
+          "name": "カニの怒り",
+          "description": "味方が死亡した時、生存個体が筋力+5と99ブロックを獲得する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "2体同時戦",
+          "moves": [
+            {
+              "turn": "各ターン",
+              "action": "攻撃/デバフ",
+              "effect": "2体がそれぞれ行動。全体攻撃・Poison有効。",
+              "damage": "中〜大"
+            }
+          ]
+        }
+      ],
+      "tips": "全体攻撃/Poisonで両方同時に削る。片方だけ倒すともう片方が暴走（筋力5+99ブロック）するので必ず同時撃破を狙う。"
+    },
+    {
+      "id": "knowledge-demon",
+      "name": "知識の悪魔",
+      "nameEn": "Knowledge Demon",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "boss",
+      "hp": "379 (A8: 399)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Knowledge_Demon.png",
+      "abilities": [
+        {
+          "name": "知識の呪縛（3セット）",
+          "description": "第1セット：崩壊6（毎ターン6ダメ）orマインドロット（ドロー-1）。第2セット：崩壊7orスロース（カード3枚制限）。第3セット：崩壊8orウェイストアウェイ（エナジー-1）。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "前半（3セット呪縛まで、4ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1（4の倍数-3）",
+              "action": "知識の呪縛",
+              "effect": "デバフ2択を強制選択",
+              "damage": "-"
+            },
+            {
+              "turn": "2（4の倍数-2）",
+              "action": "スラップ",
+              "effect": "単体攻撃",
+              "damage": "17 (A9: 18)"
+            },
+            {
+              "turn": "3（4の倍数-1）",
+              "action": "知識の圧倒",
+              "effect": "3連撃",
+              "damage": "8×3 (A9: 9×3)"
+            },
+            {
+              "turn": "4（4の倍数）",
+              "action": "熟考",
+              "effect": "攻撃＋HP30回復＋筋力+2（永続）",
+              "damage": "11 (A9: 13)"
+            }
+          ]
+        },
+        {
+          "name": "後半（3セット選択後、3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スラップ",
+              "effect": "単体攻撃",
+              "damage": "17 (A9: 18)"
+            },
+            {
+              "turn": "2",
+              "action": "知識の圧倒",
+              "effect": "3連撃",
+              "damage": "8×3 (A9: 9×3)"
+            },
+            {
+              "turn": "3",
+              "action": "熟考",
+              "effect": "攻撃＋HP30回復＋筋力+2（永続）",
+              "damage": "11 (A9: 13)"
+            }
+          ]
+        }
+      ],
+      "tips": "デバフは3セット全て選ばされる。崩壊を3回選ぶと毎ターン合計21ダメージになるため、1〜2個はドロー/エナジー系デバフを受け入れる方が楽な場合も。熟考でHP回復するため速攻が重要。筋力上昇が蓄積するので長期戦は危険。"
+    },
+    {
+      "id": "the-insatiable",
+      "name": "貪りの獣",
+      "nameEn": "The Insatiable",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "boss",
+      "hp": "321 (A8: 341)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_The_Insatiable.png",
+      "abilities": [
+        {
+          "name": "砂地獄（サンドピット）",
+          "description": "戦闘開始時にサンドピット4を付与する。Xターン後に即死。フランティックエスケープカードを使用するとサンドピットが1増加してターンを延ばせる。"
+        },
+        {
+          "name": "フランティックエスケープ",
+          "description": "戦闘開始時にデッキに6枚混入（ドロー3・捨て札3）。コスト1のステータスカードで使用するとサンドピット+1・カードコスト+1。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（4ターンサイクル、初手のみLiquify Ground）",
+          "moves": [
+            {
+              "turn": "0（初手）",
+              "action": "リクィファイグラウンド",
+              "effect": "サンドピット4付与＋フランティックエスケープ6枚混入",
+              "damage": "-"
+            },
+            {
+              "turn": "1, 4（繰り返し）",
+              "action": "スラッシュ",
+              "effect": "2連撃",
+              "damage": "8×2 (A8: 9×2)"
+            },
+            {
+              "turn": "2, 5（繰り返し）",
+              "action": "ランジングバイト",
+              "effect": "強力な単体攻撃",
+              "damage": "28 (A8: 31)"
+            },
+            {
+              "turn": "3, 6（繰り返し）",
+              "action": "サリベート",
+              "effect": "筋力+2（永続）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "フランティックエスケープは手札に来たら基本的に使う（サンドピット延長）。ランジングバイトの28ダメは必ずブロックしたい。サリベートで筋力が蓄積するため長期戦は危険。Poisonや毒系はデバフ/フェーズ問わず有効。"
+    },
+    {
+      "id": "decimillipede",
+      "name": "万足ムカデ",
+      "nameEn": "Decimillipede",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "elite",
+      "hp": "各セグメント: 42-48 (A8: 48-56) × 3セグメント",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Decimillipede.png",
+      "abilities": [
+        {
+          "name": "リアタッチ（再接続）",
+          "description": "他のセグメントが生存している場合、倒されたセグメントは2ターン後にHP25で復活する。"
+        },
+        {
+          "name": "デッド状態",
+          "description": "セグメント撃破時は1ターン死亡状態になり、その後1ターンで復活。復活後はランダムな位置から通常サイクルを再開。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3セグメント同時戦（各セグメントが3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1（初手のみ Reattach）",
+              "action": "リアタッチ",
+              "effect": "再接続準備状態",
+              "damage": "-"
+            },
+            {
+              "turn": "サイクル1",
+              "action": "ライズ",
+              "effect": "2連撃",
+              "damage": "5×2 (A8: 6×2)"
+            },
+            {
+              "turn": "サイクル2",
+              "action": "バルク",
+              "effect": "単体攻撃＋筋力+2",
+              "damage": "6 (A8: 7)"
+            },
+            {
+              "turn": "サイクル3",
+              "action": "コンストリクト",
+              "effect": "攻撃＋弱体1付与",
+              "damage": "8 (A8: 9)"
+            }
+          ]
+        }
+      ],
+      "tips": "他のセグメントが残っている限り復活するため、全セグメントをほぼ同時に撃破する必要がある。全体攻撃・Poison・爆発ポーションが有効。バルクで筋力が上昇するセグメントを優先的に削る。"
+    },
+    {
+      "id": "entomancer",
+      "name": "エントマンサー",
+      "nameEn": "Entomancer",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "elite",
+      "hp": "145",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Entomancer.png",
+      "abilities": [
+        {
+          "name": "パーソナルハイヴ",
+          "description": "アタックカードで被弾する度に「めまい」を山札に追加する。スキルで攻撃すれば回避可能。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（3Tループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "攻撃",
+              "effect": "7連撃",
+              "damage": "3×7"
+            },
+            {
+              "turn": "2",
+              "action": "攻撃",
+              "effect": "単体攻撃",
+              "damage": "18"
+            },
+            {
+              "turn": "3",
+              "action": "バフ",
+              "effect": "パーソナルハイヴ+1＋筋力+1",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "スキル主体で戦うとめまい回避可能。アタック被弾でめまいが溜まるので多段攻撃カードは特に被害が大きい。ソブリンブレード等の一撃高火力が有効。"
+    },
+    {
+      "id": "infested-prism",
+      "name": "寄生されたプリズム",
+      "nameEn": "Infested Prism",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "elite",
+      "hp": "200 (A8: 215)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Infested_Prism.png",
+      "abilities": [
+        {
+          "name": "バイタルスパーク",
+          "description": "各ターン初めてアタックダメージを受けたとき、攻撃したプレイヤーにエナジー1を付与する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（4ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ジャブ",
+              "effect": "単体攻撃",
+              "damage": "22 (A8: 24)"
+            },
+            {
+              "turn": "2",
+              "action": "ラジエート",
+              "effect": "攻撃＋ブロック16獲得",
+              "damage": "16 (A8: 18)"
+            },
+            {
+              "turn": "3",
+              "action": "ワールウィンド",
+              "effect": "3連撃",
+              "damage": "9×3 (A8: 10×3)"
+            },
+            {
+              "turn": "4",
+              "action": "パルセイト",
+              "effect": "ブロック20獲得＋筋力+4（A8: ブロック22・筋力+5）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "バイタルスパークで最初にアタックするたびエナジーが1もらえる。これを活用した高火力アタックビルドが非常に有利。ワールウィンドの3連撃は合計27ダメなので注意。パルセイトのターンに筋力+4が蓄積するためできるだけ早く倒す。"
+    },
+    {
+      "id": "bowlbug-duo",
+      "name": "ボウルバグ（2体）",
+      "nameEn": "Bowlbug Duo",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "ロック45-48 / エッグ21-22 / シルク40-43 / ネクター35-38 (A8各+1-2)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Bowlbug_%28Rock%29.png",
+      "abilities": [
+        {
+          "name": "ボウルバグ(ロック): スタン",
+          "description": "ブロックが全て貫通された場合スタンする"
+        },
+        {
+          "name": "ボウルバグ(ネクター): 筋力特化",
+          "description": "2ターン目に筋力+15を獲得し以降高火力"
+        }
+      ],
+      "phases": [
+        {
+          "name": "ロック",
+          "moves": [
+            {
+              "turn": "毎ターン",
+              "action": "ヘッドバット（全ブロック貫通時スタン）",
+              "effect": "通常攻撃。ブロックが0になるとスタン",
+              "damage": "15 (A8:16)"
+            }
+          ]
+        },
+        {
+          "name": "エッグ",
+          "moves": [
+            {
+              "turn": "毎ターン",
+              "action": "バイト",
+              "effect": "攻撃＋ブロック+7 (A8:+8-9)",
+              "damage": "7 (A8:8-9)"
+            }
+          ]
+        },
+        {
+          "name": "シルク",
+          "moves": [
+            {
+              "turn": "交互",
+              "action": "スピンウェブ↔スラッシュ交互",
+              "effect": "スピンウェブは弱体×1",
+              "damage": "- or 4×2 (A8:5×2)"
+            }
+          ]
+        },
+        {
+          "name": "ネクター",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "スロー（単体攻撃）",
+              "effect": "",
+              "damage": "3"
+            },
+            {
+              "turn": "2",
+              "action": "バフ（筋力+15 A8:+16）",
+              "effect": "高筋力状態に",
+              "damage": "-"
+            },
+            {
+              "turn": "3以降",
+              "action": "スロー（高筋力状態）",
+              "effect": "",
+              "damage": "3+15=18"
+            }
+          ]
+        }
+      ],
+      "tips": "ネクターボウルバグは2ターン目のバフ前に撃破したい。ロックボウルバグはブロックを貫通するとスタンする。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "bowlbug-trio",
+      "name": "ボウルバグ（3体）",
+      "nameEn": "Bowlbug Trio",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "バリアントにより異なる（3体） ロック45-48 / エッグ21-22 / シルク40-43 / ネクター35-38 (A8各+1)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Bowlbug_%28Rock%29.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "3体のボウルバグ（各バリアント参照）",
+          "moves": [
+            {
+              "turn": "各",
+              "action": "各ボウルバグのパターン参照",
+              "effect": "Bowlbug Duo参照",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "Bowlbug Duoより1体多い。ネクターやロックの処理を優先する。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "chompers",
+      "name": "チョンパーズ",
+      "nameEn": "Chompers",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "60-64 (A8: 63-67) ×2体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Chomper.png",
+      "abilities": [
+        {
+          "name": "アーティファクト2",
+          "description": "デバフを2回まで無効化する"
+        }
+      ],
+      "phases": [
+        {
+          "name": "ペア戦（1体クランプ開始、1体スクリーチ開始）",
+          "moves": [
+            {
+              "turn": "交互",
+              "action": "1体:クランプ↔スクリーチ / 2体目:スクリーチ↔クランプ（交互）",
+              "effect": "クランプ:2連攻撃 / スクリーチ:Dazed×3を捨て札に",
+              "damage": "8×2 (A8:9×2) or -"
+            }
+          ]
+        }
+      ],
+      "tips": "スクリーチでDazedカードがデッキに入り続ける。アーティファクト2でデバフが効きにくい。毎ターンどちらかが攻撃し続ける。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "exoskeleton-pack",
+      "name": "外骨格の群れ",
+      "nameEn": "Exoskeleton Pack",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "24-28 (A8: 25-29) ×4体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Exoskeleton.png",
+      "abilities": [
+        {
+          "name": "ハードトゥキル",
+          "description": "受けるダメージとHP損失の上限が9"
+        }
+      ],
+      "phases": [
+        {
+          "name": "4体（各異なる開始行動）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "1体目:スキター / 2体目:マンディブルス / 3体目:エンレイジ / 4体目:スキターまたはマンディブルスランダム",
+              "effect": "",
+              "damage": "1×3 or 8 or -"
+            },
+            {
+              "turn": "以降",
+              "action": "スキター後はランダム。マンディブルス後は必ずエンレイジ。エンレイジ後はランダム",
+              "effect": "エンレイジは筋力+2",
+              "damage": "1×3 or 8 or -"
+            }
+          ]
+        }
+      ],
+      "tips": "ハードトゥキルで1体あたり1ターン最大9ダメしか与えられない。多段攻撃より1ターンに複数体を集中攻撃すること。エンレイジで筋力が蓄積する。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "exoskeleton-trio",
+      "name": "外骨格トリオ",
+      "nameEn": "Exoskeleton Trio",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "24-28 (A8: 25-29) ×3体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Exoskeleton.png",
+      "abilities": [
+        {
+          "name": "ハードトゥキル",
+          "description": "受けるダメージとHP損失の上限が9"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3体（各異なる開始行動）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "1体目:スキター / 2体目:マンディブルス / 3体目:エンレイジ",
+              "effect": "",
+              "damage": "1×3 or 8 or -"
+            },
+            {
+              "turn": "以降",
+              "action": "パックと同様のパターン",
+              "effect": "",
+              "damage": "1×3 or 8 or -"
+            }
+          ]
+        }
+      ],
+      "tips": "パックより1体少ないが同様の戦略。ハードトゥキルで最大9ダメ制限に注意。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "hunter-killer",
+      "name": "ハンターキラー",
+      "nameEn": "Hunter Killer",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "121 (A8: 126)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Hunter_Killer.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "固定初手→ランダム",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "テンダライジンググープ",
+              "effect": "テンダーデバフ付与",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "パンクチャー(66%)またはバイト(33%)ランダム（バイト連続不可）",
+              "effect": "",
+              "damage": "7×3 (A8:8×3) or 17 (A8:19)"
+            }
+          ]
+        }
+      ],
+      "tips": "初手で必ずテンダーデバフ付与。パンクチャーは3連攻撃（最も頻繁）。バイトは高単発ダメージ。HPが高く長期戦になりやすい。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "louse-progenitor",
+      "name": "シラミの母体",
+      "nameEn": "Louse Progenitor",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "134-136 (A8: 138-141)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Louse_Progenitor.png",
+      "abilities": [
+        {
+          "name": "カールアップ",
+          "description": "最初にダメージを受けた時、ブロック+14 (A8:+18)を得る"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ウェブカノン",
+              "effect": "攻撃＋脆弱×2付与",
+              "damage": "9 (A8:10)"
+            },
+            {
+              "turn": "2",
+              "action": "カールアンドグロウ",
+              "effect": "ブロック+14＋筋力+5 (A8:ブロック+18)",
+              "damage": "-"
+            },
+            {
+              "turn": "3",
+              "action": "パウンス",
+              "effect": "単体攻撃",
+              "damage": "14 (A8:16)"
+            }
+          ]
+        }
+      ],
+      "tips": "カールアップで最初の攻撃時にブロックを得る。カールアンドグロウで毎ループ筋力+5が蓄積。ウェブカノンの脆弱デバフに注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "mytes",
+      "name": "マイツ",
+      "nameEn": "Mytes",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "61-67 (A8: 64-69) ×2体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Myte.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "ペア戦（1体トキシックコルヌコピア開始、1体サック開始）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "1体目:トキシックコルヌコピア（手札に毒カード×2追加）/ 2体目:サック（攻撃＋筋力+2）",
+              "effect": "",
+              "damage": "- or 4 (A9:6)"
+            },
+            {
+              "turn": "2",
+              "action": "バイト",
+              "effect": "単体攻撃",
+              "damage": "13 (A9:15)"
+            },
+            {
+              "turn": "3",
+              "action": "サック",
+              "effect": "攻撃＋筋力+2 (A9:+3)",
+              "damage": "4 (A9:6)"
+            },
+            {
+              "turn": "以降",
+              "action": "繰り返し",
+              "effect": "",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "1体が毒カードを手札に入れ、もう1体が筋力を蓄積する連携型。毒カード混入とデッキ汚染に注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "ovicopter",
+      "name": "オヴィコプター",
+      "nameEn": "Ovicopter",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "124-130 (A8: 126-132)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Ovicopter.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "卵サイクル",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "レイエッグス",
+              "effect": "タフエッグ×3召喚（HP14-18、2ターン後孵化→ハッチリングHP19-22、毎ターン4ダメ）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "スマッシュ",
+              "effect": "強攻撃",
+              "damage": "16 (A9:17)"
+            },
+            {
+              "turn": "3",
+              "action": "テンダライザー",
+              "effect": "攻撃＋脆弱×2",
+              "damage": "7 (A9:8)"
+            },
+            {
+              "turn": "4(条件)",
+              "action": "味方3体以下:レイエッグス / 4体以上:ニュートリショナルペースト（筋力+3 A9:+4）",
+              "effect": "条件分岐",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "卵がハッチリング（毎ターン4ダメ）に孵化する前に破壊する。テンダライザーの脆弱デバフに注意。味方が少ないと卵を再産卵する。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "spiny-toad",
+      "name": "トゲガエル",
+      "nameEn": "Spiny Toad",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "116-119 (A8: 121-124)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Spiny_Toad.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "プロトルーディングスパイクス",
+              "effect": "ソーン+5獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "スパイクエクスプロージョン",
+              "effect": "強攻撃＋ソーン-5消費",
+              "damage": "23 (A9:25)"
+            },
+            {
+              "turn": "3",
+              "action": "タングラッシュ",
+              "effect": "単体攻撃",
+              "damage": "17 (A9:19)"
+            }
+          ]
+        }
+      ],
+      "tips": "ソーンを獲得後にスパイクエクスプロージョンで消費。ソーン獲得中に攻撃するとこちらがダメージを受ける。スパイクエクスプロージョンは高ダメージ（23）なので要注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "the-obscura",
+      "name": "ジ・オブスキュラ",
+      "nameEn": "The Obscura",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "123 (A8: 129)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_The_Obscura.png",
+      "abilities": [
+        {
+          "name": "イリュージョン（パラフライト：復活）",
+          "description": "パラフライト（HP21 / A8:23、毎ターン16ダメ）は倒されると次のターンに全HP回復して復活する"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定初手→ランダム",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "イリュージョン",
+              "effect": "パラフライト召喚",
+              "damage": "-"
+            },
+            {
+              "turn": "2以降",
+              "action": "ピアシングゲイズ/ワイル/ハーデニングストライク ランダム（連続不可）",
+              "effect": "ワイル:全敵に筋力+3",
+              "damage": "10 (A8:11) or - or 6"
+            }
+          ]
+        }
+      ],
+      "tips": "パラフライトは復活するため本体（ジ・オブスキュラ）を優先。ワイルは筋力+3を全敵に与えるため放置厳禁。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "thieving-hopper",
+      "name": "盗みホッパー",
+      "nameEn": "Thieving Hopper",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "79 (A8: 84)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Thieving_Hopper.png",
+      "abilities": [
+        {
+          "name": "エスケープアーティスト5",
+          "description": "フラッター中に5回攻撃を受けるとスタン"
+        },
+        {
+          "name": "フラッター",
+          "description": "受けるダメージ50%減少。攻撃5ヒットでスタン解除"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定5ターンシーケンス",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "シーヴァリー",
+              "effect": "攻撃＋デッキからカードを1枚盗む",
+              "damage": "17 (A8:19)"
+            },
+            {
+              "turn": "2",
+              "action": "フラッター",
+              "effect": "ダメージ50%減少バフ獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "3",
+              "action": "ハットトリック",
+              "effect": "強攻撃",
+              "damage": "21 (A8:23)"
+            },
+            {
+              "turn": "4",
+              "action": "ナブ",
+              "effect": "攻撃",
+              "damage": "14 (A8:16)"
+            },
+            {
+              "turn": "5",
+              "action": "エスケープ",
+              "effect": "逃走（盗んだカードを永久に失う）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "5ターン以内に撃破しないと逃走してカードを永久に失う。フラッター前（1ターン目）に集中攻撃するか、フラッター後に5ヒット以上で撃破を狙う。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "tunneler",
+      "name": "トンネラー",
+      "nameEn": "Tunneler",
+      "act": "act2",
+      "biome": "魔窟",
+      "biomeEn": "Hive",
+      "type": "normal",
+      "hp": "87 (A8: 92)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Tunneler.png",
+      "abilities": [
+        {
+          "name": "バロウ中: ブロック持続",
+          "description": "バロウ状態中はターン開始時にブロックが消えない。ブロックが全て削られるとスタン。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定サイクル（バロウ→潜行攻撃ループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "バイト",
+              "effect": "初手攻撃",
+              "damage": "13 (A9:15)"
+            },
+            {
+              "turn": "2",
+              "action": "バロウ",
+              "effect": "バロウド状態になりブロック+32 (A8:37)取得、ブロック持続",
+              "damage": "-"
+            },
+            {
+              "turn": "バロウ中毎ターン",
+              "action": "アタックフロムビロウ",
+              "effect": "強攻撃",
+              "damage": "23 (A9:26)"
+            },
+            {
+              "turn": "ブロック消滅時",
+              "action": "エマージングストライク",
+              "effect": "スタン付与",
+              "damage": "-"
+            },
+            {
+              "turn": "スタン後",
+              "action": "バイト（サイクル再開）",
+              "effect": "",
+              "damage": "13"
+            }
+          ]
+        }
+      ],
+      "tips": "バロウ状態のブロック（32）を全て削ると強制スタン。多段攻撃やブロック貫通カードで一気に削るのが有効。スタン中はフリーターン。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "doormaker",
+      "name": "ドアメーカー",
+      "nameEn": "Doormaker",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "boss",
+      "hp": "ドア: 155 (A8: 165) / ドアメーカー本体: 489 (A8: 512)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Doormaker.png",
+      "abilities": [
+        {
+          "name": "ドアの復活",
+          "description": "ドアメーカーはドアを復活させ毎サイクル最大HP+20（A8: +25）。ドアを倒してもドアメーカーを倒さないと戦闘は終わらない。"
+        },
+        {
+          "name": "スタック蓄積",
+          "description": "ドアメーカーはフェーズ間でスタックを保有し毎サイクル5追加。スタックが高いほどGetBackIn等の威力が増す。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "ドアフェーズ（3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ドラマティックオープン",
+              "effect": "単体攻撃",
+              "damage": "25 (A8: 28)"
+            },
+            {
+              "turn": "2",
+              "action": "ドアスラム",
+              "effect": "2連撃",
+              "damage": "15×2"
+            },
+            {
+              "turn": "3",
+              "action": "エンフォース",
+              "effect": "攻撃＋スタック3獲得（A8: 4）",
+              "damage": "20"
+            }
+          ]
+        },
+        {
+          "name": "ドアメーカーフェーズ（ドア撃破後3ステップ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ワットイズイット",
+              "effect": "何もしない",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "ビーム",
+              "effect": "単体攻撃",
+              "damage": "31 (A8: 34)"
+            },
+            {
+              "turn": "3",
+              "action": "ゲットバックイン",
+              "effect": "攻撃＋スタック5獲得（A8: 6）＋ドアを強化して復活させ自身は消滅",
+              "damage": "40 (A8: 45)"
+            }
+          ]
+        }
+      ],
+      "tips": "ドアメーカー本体を倒すことが勝利条件。ドアのHP削りを優先しつつドアメーカーが出現したら全力で攻撃。スタックが蓄積するほどGetBackInが強くなるので長期戦は避ける。パワーカードは初手に展開しておく。"
+    },
+    {
+      "id": "queen",
+      "name": "クイーン",
+      "nameEn": "Queen",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "boss",
+      "hp": "400 (A8: 419)、トーチヘッドアマルガム: 199 (A8: 211)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Queen.png",
+      "abilities": [
+        {
+          "name": "束縛の鎖（チェインズオブバインディング）",
+          "description": "手札から最初に引いた3枚のカードのうち1枚しかプレイできなくなる。毎ターン付与。"
+        },
+        {
+          "name": "トーチヘッドアマルガム（ミニオン）",
+          "description": "HP199のミニオン。存命中はクイーンがバーンブライトフォーミー（ミニオン筋力+1・自身ブロック20）を使い続ける。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "開幕（固定2行動）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "パペットストリングス",
+              "effect": "束縛の鎖3付与",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "ユーアーマイン",
+              "effect": "脆弱・弱体・フレイル各99付与",
+              "damage": "-"
+            }
+          ]
+        },
+        {
+          "name": "アマルガム存命中",
+          "moves": [
+            {
+              "turn": "以降ループ",
+              "action": "バーンブライトフォーミー",
+              "effect": "アマルガムに筋力+1＋自身ブロック20獲得",
+              "damage": "-"
+            }
+          ]
+        },
+        {
+          "name": "アマルガム撃破後（3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "オフウィズユアヘッド",
+              "effect": "5連撃",
+              "damage": "3×5 (A8: 4×5)"
+            },
+            {
+              "turn": "2",
+              "action": "エクセキューション",
+              "effect": "強力な単体攻撃",
+              "damage": "15 (A8: 18)"
+            },
+            {
+              "turn": "3",
+              "action": "エンレイジ",
+              "effect": "筋力+2（永続）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "束縛の鎖とデバフ99スタックの開幕2ターンが最大の難所。アマルガムを倒すと本体が攻撃開始。脆弱状態中はオフウィズユアヘッドが約7×5、エクセキューションが約25相当になるので要注意。アマルガムを倒した直後にエンレイジからサイクル開始されることも。"
+    },
+    {
+      "id": "test-subject",
+      "name": "実験体 #C18",
+      "nameEn": "Test Subject",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "boss",
+      "hp": "第1形態: 100 (A8: 111) / 第2形態: 200 (A8: 212) / 第3形態: 300 (A8: 313)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Test_Subject.png",
+      "abilities": [
+        {
+          "name": "アダプタブル",
+          "description": "HP0になっても復活してより強力になる（全3形態）。フェーズ移行時にデバフはリセットされる。"
+        },
+        {
+          "name": "エンレイジ（第1形態）",
+          "description": "スキルカードを使用するたびに筋力+2（A9: +3）。スキル多用は危険。"
+        },
+        {
+          "name": "ペインフルスタブス（第2形態）",
+          "description": "ブロックされなかったダメージを受けるたびに負傷カードが捨て札に混入される。"
+        },
+        {
+          "name": "ネメシス（第3形態）",
+          "description": "2ターンに1回（最初のターンから）無敵1を獲得する。無敵状態のモンスターはダメージが1しか入らない。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "第1形態（2ターン交互）",
+          "moves": [
+            {
+              "turn": "奇数T",
+              "action": "バイト",
+              "effect": "単体攻撃",
+              "damage": "20 (A9: 22)"
+            },
+            {
+              "turn": "偶数T",
+              "action": "スカルバッシュ",
+              "effect": "単体攻撃＋脆弱1付与",
+              "damage": "14 (A9: 16)"
+            }
+          ]
+        },
+        {
+          "name": "第2形態（2ターン交互）",
+          "moves": [
+            {
+              "turn": "奇数T",
+              "action": "マルチクロー",
+              "effect": "多段攻撃（初回3ヒット・以降1ずつ増加）",
+              "damage": "10×3〜 (A9: 11×3〜)"
+            },
+            {
+              "turn": "偶数T",
+              "action": "パウンス",
+              "effect": "強力な単体攻撃",
+              "damage": "30 (A9: 32)"
+            }
+          ]
+        },
+        {
+          "name": "第3形態（3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "1（無敵）",
+              "action": "ラセレート",
+              "effect": "3連撃（無敵状態）",
+              "damage": "10×3 (A9: 11×3)"
+            },
+            {
+              "turn": "2",
+              "action": "ビッグパウンス",
+              "effect": "強力な単体攻撃",
+              "damage": "45"
+            },
+            {
+              "turn": "3（無敵）",
+              "action": "バーニンググロウル",
+              "effect": "バーン3枚デッキ混入＋筋力+2（A9: バーン5枚・筋力+3）（無敵状態）",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "第1形態はスキルカード使用でエンレイジが発動するためアタック主体で速攻する。第2形態はブロックできない攻撃があると負傷が蓄積するため必ずブロックを確保。第3形態は無敵ターンを見極め、非無敵ターンのビッグパウンス（45ダメ）に備えたブロックが必須。Poison等はフェーズ移行でリセットされる点に注意。"
+    },
+    {
+      "id": "knight-trio",
+      "name": "ナイト三人衆",
+      "nameEn": "Knight Trio",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "elite",
+      "hp": "フレイルナイト: 101 (A8: 108) / スペクトルナイト: 93 (A8: 97) / マギナイト: 82 (A8: 89)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Magi_Knight.png",
+      "abilities": [
+        {
+          "name": "スペクトルナイト：エセリアル付与",
+          "description": "存命中、プレイヤーの全カードがエセリアル化（使用後消滅）する。撃破すると解除。"
+        },
+        {
+          "name": "マギナイト：ダウングレード",
+          "description": "存命中、プレイヤーの全カードがダウングレードされる。撃破すると解除。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "フレイルナイト（ランダム行動）",
+          "moves": [
+            {
+              "turn": "初手",
+              "action": "ラム",
+              "effect": "単体攻撃（固定開幕）",
+              "damage": "15 (A9: 17)"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "ブレイカー",
+              "effect": "筋力+3（連続使用不可）",
+              "damage": "-"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "フレイル",
+              "effect": "2連撃",
+              "damage": "9×2 (A9: 10×2)"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "ラム",
+              "effect": "単体攻撃",
+              "damage": "15 (A9: 17)"
+            }
+          ]
+        },
+        {
+          "name": "スペクトルナイト",
+          "moves": [
+            {
+              "turn": "初手",
+              "action": "ヘックス",
+              "effect": "ヘックス2付与",
+              "damage": "-"
+            },
+            {
+              "turn": "以降（交互）",
+              "action": "ソウルスラッシュ",
+              "effect": "単体攻撃",
+              "damage": "15 (A9: 17)"
+            },
+            {
+              "turn": "以降（交互）",
+              "action": "ソウルフレーム",
+              "effect": "3連撃",
+              "damage": "3×3 (A9: 4×3)"
+            }
+          ]
+        },
+        {
+          "name": "マギナイト",
+          "moves": [
+            {
+              "turn": "初手",
+              "action": "パワーシールド",
+              "effect": "攻撃＋ブロック5獲得",
+              "damage": "6"
+            },
+            {
+              "turn": "2",
+              "action": "ダンペン",
+              "effect": "ダウングレード付与",
+              "damage": "-"
+            },
+            {
+              "turn": "3ターンサイクル",
+              "action": "ラム→プレップ→マジックボム",
+              "effect": "攻撃/ブロック5/強攻撃",
+              "damage": "10 / - / 35 (A9: 40)"
+            }
+          ]
+        }
+      ],
+      "tips": "スペクトルナイト（エセリアル付与）とマギナイト（ダウングレード）のどちらかを最優先で倒す。マギナイトはHPが最も低い（82）ため先に倒しやすい。マジックボムが35ダメと高火力なので要注意。フレイルナイトは筋力バフが蓄積するため放置は危険だが最後に処理しても問題ない場合が多い。"
+    },
+    {
+      "id": "mecha-knight",
+      "name": "メカナイト",
+      "nameEn": "Mecha Knight",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "elite",
+      "hp": "300 (A8: 320)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Mecha_Knight.png",
+      "abilities": [
+        {
+          "name": "アーティファクト3",
+          "description": "戦闘開始時にアーティファクト3を所持。デバフを3回無効化する。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（チャージから開始、以後3ターンサイクル）",
+          "moves": [
+            {
+              "turn": "初手",
+              "action": "チャージ",
+              "effect": "単体攻撃（固定開幕）",
+              "damage": "25 (A8: 30)"
+            },
+            {
+              "turn": "1（サイクル）",
+              "action": "フレイムスロワー",
+              "effect": "手札に「バーン」4枚を追加",
+              "damage": "-"
+            },
+            {
+              "turn": "2（サイクル）",
+              "action": "ワインドアップ",
+              "effect": "ブロック15獲得＋筋力5",
+              "damage": "-"
+            },
+            {
+              "turn": "3（サイクル）",
+              "action": "ヘビークリーブ",
+              "effect": "強力な単体攻撃",
+              "damage": "35 (A8: 40)"
+            }
+          ]
+        }
+      ],
+      "tips": "アーティファクト3を消費させてからデバフ（脱力等）が有効。フレイムスロワーでバーンが毎サイクル手札に蓄積するためバーン処理手段を用意する。ヘビークリーブは35〜40の超高火力なので必ずブロックする。ワインドアップ後の筋力5バフで以降さらに威力が増すため速攻が重要。"
+    },
+    {
+      "id": "soul-nexus",
+      "name": "ソウルネクサス",
+      "nameEn": "Soul Nexus",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "elite",
+      "hp": "234 (A8: 254)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Soul_Nexus.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "通常（初手ソウルバーン→ランダム3択、連続同一行動不可）",
+          "moves": [
+            {
+              "turn": "初手（固定）",
+              "action": "ソウルバーン",
+              "effect": "単体攻撃",
+              "damage": "29 (A8: 31)"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "ソウルバーン",
+              "effect": "単体攻撃",
+              "damage": "29 (A8: 31)"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "メイルストロム",
+              "effect": "6連撃",
+              "damage": "4×6 (A8: 4×7)"
+            },
+            {
+              "turn": "以降（ランダム）",
+              "action": "ドレインライフ",
+              "effect": "攻撃＋脆弱2＋弱体2付与",
+              "damage": "18 (A8: 19)"
+            }
+          ]
+        }
+      ],
+      "tips": "ドレインライフで脆弱+弱体が両方付与されるためデバフ蓄積に注意。ソウルバーンとメイルストロムが主なダメージ源。脆弱状態中のソウルバーンは約43ダメになるため、ドレインライフを受けた後は特に注意してブロックする。デバフ耐性カード/レリックがあると楽になる。"
+    },
+    {
+      "id": "axebots",
+      "name": "アックスボット",
+      "nameEn": "Axebots",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "40-44 (A8: 42-46) ×2体（+召喚分）",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Axebot.png",
+      "abilities": [
+        {
+          "name": "ストック2",
+          "description": "倒された時、新しいアックスボットが召喚される（最大2回分ストック）"
+        }
+      ],
+      "phases": [
+        {
+          "name": "通常（再召喚時はブートアップから開始）",
+          "moves": [
+            {
+              "turn": "1(初手or再召喚時)",
+              "action": "ブートアップ",
+              "effect": "ブロック+10＋筋力+1",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "ザワンツー(x2重み)/ハンマーアッパーカット(x2重み)/シャープン(x1重み) ランダム",
+              "effect": "シャープン連続不可、シャープン:筋力+4",
+              "damage": "5×2 (A9:6×2) or 8+弱体+脆弱 (A9:10) or -"
+            }
+          ]
+        }
+      ],
+      "tips": "ストックで倒しても新しい個体が召喚される（最大2回）。再召喚時はブートアップから始まる。シャープンで筋力が蓄積。ハンマーアッパーカットは弱体＋脆弱付与。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "devoted-sculptor",
+      "name": "献身の彫刻家",
+      "nameEn": "Devoted Sculptor",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "162 (A8: 172)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Devoted_Sculptor.png",
+      "abilities": [
+        {
+          "name": "リチュアル（毎ターン筋力増加）",
+          "description": "フォービドゥンインカンテーションでリチュアル9スタックを獲得。毎ターン終了時に筋力+9。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "固定パターン（初手リチュアル→毎ターン攻撃）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "フォービドゥンインカンテーション",
+              "effect": "リチュアル+9スタック獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "2以降",
+              "action": "サヴェージ（毎ターン）",
+              "effect": "単体攻撃（毎ターン筋力+9）",
+              "damage": "12 (A8:15)"
+            }
+          ]
+        }
+      ],
+      "tips": "初手でリチュアル9を獲得し、毎ターン筋力+9。2ターン目:筋力9でサヴェージ21ダメ、3ターン目:筋力18で30ダメと急速に増加。超早期撃破が必須。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "fabricator",
+      "name": "ファブリケーター",
+      "nameEn": "Fabricator",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "150 (A8: 155)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Fabricator.png",
+      "abilities": [
+        {
+          "name": "ファブリケート（条件召喚）",
+          "description": "味方が4体未満の時に防衛/攻撃ボットをそれぞれ1体召喚。同じボットを連続召喚しない"
+        }
+      ],
+      "phases": [
+        {
+          "name": "召喚ループ",
+          "moves": [
+            {
+              "turn": "味方<4",
+              "action": "ファブリケート",
+              "effect": "ガードボット(HP21-25、毎ターンファブリケーターにブロック+15)またはノイズボット(HP23-28、Dazed×2デッキ汚染)＋ザップボット(HP23-28、毎ターン14ダメ+筋力+1)またはスタブボット(HP23-28、毎ターン11ダメ+脆弱×1)を各1体召喚",
+              "damage": "-"
+            },
+            {
+              "turn": "味方≥4",
+              "action": "ディスインテグレート",
+              "effect": "単体攻撃",
+              "damage": "11 (A9:13)"
+            },
+            {
+              "turn": "混合",
+              "action": "ファブリケーティングストライク",
+              "effect": "攻撃＋攻撃ボット1体召喚",
+              "damage": "18 (A9:21)"
+            }
+          ]
+        }
+      ],
+      "tips": "ザップボットは毎ターン筋力増加で危険。ガードボットは本体にブロックを与え続ける。ノイズボットのDazedカード汚染も脅威。ミニオンを優先して倒しながら本体を狙う。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "frog-knight",
+      "name": "フロッグナイト",
+      "nameEn": "Frog Knight",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "191 (A8: 199)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Frog_Knight.png",
+      "abilities": [
+        {
+          "name": "プレーティング15 (A8:19)",
+          "description": "ターン終了時にブロック+X（毎ターン-1）を得る"
+        }
+      ],
+      "phases": [
+        {
+          "name": "フェーズ1（HP50%以上）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "タングラッシュ",
+              "effect": "攻撃＋脆弱×2",
+              "damage": "13 (A9:14)"
+            },
+            {
+              "turn": "2",
+              "action": "ストライクダウンイービル",
+              "effect": "強攻撃",
+              "damage": "21 (A9:23)"
+            },
+            {
+              "turn": "3",
+              "action": "フォーザクイーン",
+              "effect": "筋力+5",
+              "damage": "-"
+            },
+            {
+              "turn": "以降",
+              "action": "サイクル繰り返し",
+              "effect": "",
+              "damage": ""
+            }
+          ]
+        },
+        {
+          "name": "フェーズ2（HP50%未満、1回限り割り込み）",
+          "moves": [
+            {
+              "turn": "HP50%時",
+              "action": "ビートルチャージ（1回限り）",
+              "effect": "超強攻撃",
+              "damage": "35 (A9:40)"
+            },
+            {
+              "turn": "以降",
+              "action": "タングラッシュから通常サイクル再開",
+              "effect": "",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "HP50%でビートルチャージ（35ダメ）が来るので注意。フォーザクイーンで筋力+5が蓄積する。プレーティングで毎ターンブロックも獲得。タングラッシュの脆弱に注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "globe-head",
+      "name": "グローブヘッド",
+      "nameEn": "Globe Head",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "148 (A8: 158)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Globe_Head.png",
+      "abilities": [
+        {
+          "name": "ガルヴァニック6",
+          "description": "パワーカードにGalvanized（電撃化）が付与される（詳細効果不明）"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ショッキングスラップ",
+              "effect": "攻撃＋脆弱×2",
+              "damage": "13 (A9:14)"
+            },
+            {
+              "turn": "2",
+              "action": "サンダーストライク",
+              "effect": "3連攻撃",
+              "damage": "6×3 (A9:7×3)"
+            },
+            {
+              "turn": "3",
+              "action": "ガルヴァニックバースト",
+              "effect": "攻撃＋筋力+2",
+              "damage": "16 (A9:17)"
+            }
+          ]
+        }
+      ],
+      "tips": "ガルヴァニックバーストで筋力が蓄積。ショッキングスラップの脆弱デバフに注意（被ダメ50%増）。3ターン固定で予測しやすい。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "living-shield-turret-operator",
+      "name": "リビングシールド＋タレットオペレーター",
+      "nameEn": "Living Shield + Turret Operator",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "リビングシールド55 (A8:65) / タレットオペレーター41 (A8:51)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Living_Shield.png",
+      "abilities": [
+        {
+          "name": "リビングシールド: ランパート25",
+          "description": "プレイヤーのターン開始時にタレットオペレーターがブロック+25を得る"
+        }
+      ],
+      "phases": [
+        {
+          "name": "リビングシールド",
+          "moves": [
+            {
+              "turn": "タレット存命中",
+              "action": "シールドスラム（毎ターン）",
+              "effect": "単体攻撃",
+              "damage": "6"
+            },
+            {
+              "turn": "タレット撃破後",
+              "action": "スマッシュ（毎ターン）",
+              "effect": "強攻撃＋筋力+3",
+              "damage": "16 (A8:18)"
+            }
+          ]
+        },
+        {
+          "name": "タレットオペレーター",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "アンロード！",
+              "effect": "5連攻撃",
+              "damage": "3×5 (A8:4×5)"
+            },
+            {
+              "turn": "2",
+              "action": "アンロード！",
+              "effect": "5連攻撃",
+              "damage": "3×5"
+            },
+            {
+              "turn": "3",
+              "action": "ローディング",
+              "effect": "筋力+1",
+              "damage": "-"
+            }
+          ]
+        }
+      ],
+      "tips": "タレットオペレーターが毎ターンブロックを獲得し続ける。タレットを先に倒すかシールドを先に倒すか戦略が必要。タレット撃破後はシールドが強化されスマッシュを使用。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "owl-magistrate",
+      "name": "フクロウ行政官",
+      "nameEn": "Owl Magistrate",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "234 (A8: 243)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Owl_Magistrate.png",
+      "abilities": [
+        {
+          "name": "ソアー（バフ）",
+          "description": "ジュディシャルフライトで獲得。ヴァーディクト使用時に消費。ソアー中はヴァーディクトの威力が増す。"
+        }
+      ],
+      "phases": [
+        {
+          "name": "4ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "マジストレートスクルティニー",
+              "effect": "単体攻撃",
+              "damage": "16 (A8:17)"
+            },
+            {
+              "turn": "2",
+              "action": "ペックアサルト",
+              "effect": "6連攻撃",
+              "damage": "4×6"
+            },
+            {
+              "turn": "3",
+              "action": "ジュディシャルフライト",
+              "effect": "ソアーバフ獲得",
+              "damage": "-"
+            },
+            {
+              "turn": "4",
+              "action": "ヴァーディクト",
+              "effect": "超強攻撃＋脆弱×4（ソアー消費）",
+              "damage": "33 (A8:36)"
+            }
+          ]
+        }
+      ],
+      "tips": "4ターン目のヴァーディクトが超強力（33ダメ＋脆弱×4）。3ターン目（ジュディシャルフライト）は攻撃なしなのでチャンス。HPが高い（234）ので長期戦を見越したデッキが必要。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "punch-construct-cubex-constructs",
+      "name": "パンチ構造体＋キューベックス構造体",
+      "nameEn": "Punch Construct + Cubex Constructs",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "パンチコンストラクト55 (A8:60) / キューベックスコンストラクト×2体 65 (A8:70)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Punch_Construct.png",
+      "abilities": [
+        {
+          "name": "パンチコンストラクト: アーティファクト1",
+          "description": "最初のデバフを無効化"
+        },
+        {
+          "name": "キューベックスコンストラクト: アーティファクト1＋初期ブロック13",
+          "description": "初期ブロック13、デバフ1回無効"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3体同時戦（各コンストラクト参照）",
+          "moves": [
+            {
+              "turn": "各",
+              "action": "各コンストラクトのパターン参照",
+              "effect": "単独ページ参照",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "3体同時戦闘。キューベックスのチャージアップで筋力が蓄積するため早期撃破が重要。パンチコンストラクトの弱体付与（ファストパンチ）に注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "scroll-of-biting-pack",
+      "name": "噛みつく巻物の群れ",
+      "nameEn": "Scroll of Biting Pack",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "31-38 (A8: 32-39) ×4体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Scroll_of_Biting.png",
+      "abilities": [
+        {
+          "name": "ペーパーカット2",
+          "description": "無防備状態でダメージを受けると最大HP-2される"
+        }
+      ],
+      "phases": [
+        {
+          "name": "4体（各異なるフェーズから開始）",
+          "moves": [
+            {
+              "turn": "サイクル",
+              "action": "チョンプ（14）→モアティース（筋力+2）→チュー（5×2）",
+              "effect": "各スクロールがずれて開始",
+              "damage": "14 or - or 5×2 (A9:16/-/6×2)"
+            },
+            {
+              "turn": "チュー後",
+              "action": "チョンプ(33%)またはチュー(66%)ランダム",
+              "effect": "チョンプ連続不可",
+              "damage": ""
+            }
+          ]
+        }
+      ],
+      "tips": "ペーパーカットで最大HPが削られる。4体いるため全ての攻撃をブロックしたい。筋力が蓄積するため早期撃破が重要。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "scroll-of-biting-trio",
+      "name": "噛みつく巻物トリオ",
+      "nameEn": "Scroll of Biting Trio",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "31-38 (A8: 32-39) ×3体",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Scroll_of_Biting.png",
+      "abilities": [
+        {
+          "name": "ペーパーカット2",
+          "description": "無防備状態でダメージを受けると最大HP-2される"
+        }
+      ],
+      "phases": [
+        {
+          "name": "3体（パック参照）",
+          "moves": [
+            {
+              "turn": "サイクル",
+              "action": "チョンプ→モアティース→チュー",
+              "effect": "3体がずれて開始",
+              "damage": "14 or - or 5×2"
+            }
+          ]
+        }
+      ],
+      "tips": "Packの弱いバージョン（3体）。同様にペーパーカットで最大HP削減。全ブロックを心がける。",
+      "encounterPool": "weak"
+    },
+    {
+      "id": "slimed-berserker",
+      "name": "スライム狂戦士",
+      "nameEn": "Slimed Berserker",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "266 (A8: 276)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Slimed_Berserker.png",
+      "abilities": [],
+      "phases": [
+        {
+          "name": "4ターンループ",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ヴォミットイカー",
+              "effect": "スライムド×10を捨て札に",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "フューリアスパメリング",
+              "effect": "4連攻撃",
+              "damage": "4×4 (A8:5×4)"
+            },
+            {
+              "turn": "3",
+              "action": "リーチングハグ",
+              "effect": "弱体×3付与＋筋力+3",
+              "damage": "-"
+            },
+            {
+              "turn": "4",
+              "action": "スマザー",
+              "effect": "超強攻撃",
+              "damage": "30 (A8:33)"
+            }
+          ]
+        }
+      ],
+      "tips": "スライムドカード×10でデッキが大幅汚染される。リーチングハグの弱体×3後スマザー（30ダメ）コンボが強力。弱体デバフ中のスマザーに要注意。",
+      "encounterPool": "normal"
+    },
+    {
+      "id": "the-lost-the-forgotten",
+      "name": "ザ・ロスト＋ザ・フォーガトゥン",
+      "nameEn": "The Lost + The Forgotten",
+      "act": "act3",
+      "biome": "栄光の路",
+      "biomeEn": "Glory",
+      "type": "normal",
+      "hp": "ザロスト93 (A8:99) / ザフォルゴトン106 (A8:111)",
+      "imageUrl": "https://slaythespire.wiki.gg/images/StS2_The_Lost.png",
+      "abilities": [
+        {
+          "name": "ザロスト: ポゼスストレングス",
+          "description": "倒されると盗んだ筋力を全てプレイヤーに返還"
+        },
+        {
+          "name": "ザフォルゴトン: ポゼスススピード",
+          "description": "倒されると盗んだ器用さを全てプレイヤーに返還"
+        }
+      ],
+      "phases": [
+        {
+          "name": "ザロスト（2ターンループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "デビリテイティングスモッグ",
+              "effect": "プレイヤー筋力-2＋自分の筋力+2（必ず先手）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "アイレーザーズ",
+              "effect": "2連攻撃",
+              "damage": "4×2 (A9:5×2)"
+            }
+          ]
+        },
+        {
+          "name": "ザフォルゴトン（2ターンループ）",
+          "moves": [
+            {
+              "turn": "1",
+              "action": "ミアズマ",
+              "effect": "プレイヤー器用さ-2＋自分のブロック+8＋器用さ+2（必ず先手）",
+              "damage": "-"
+            },
+            {
+              "turn": "2",
+              "action": "ドレッド",
+              "effect": "強攻撃",
+              "damage": "15 (A9:17)"
+            }
+          ]
+        }
+      ],
+      "tips": "ステータス泥棒コンビ。倒すとステータスが返ってくる。ドレッドの15ダメと器用さ低下（ブロック効率低下）の組み合わせが危険。先にどちらかを倒して被害を軽減する。",
+      "encounterPool": "normal"
+    }
+  ]
+}

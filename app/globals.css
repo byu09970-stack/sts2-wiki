@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-dark: #1a1a2e;
+  --bg-card: #16213e;
+  --accent-gold: #d4a44a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: #e0e0e0;
+  font-family: 'Noto Serif JP', Georgia, serif;
+  min-height: 100vh;
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4a44a44;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4a44a88;
+}
+
+/* テーブルスタイル */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #2a3050;
+  padding: 0.5rem 0.75rem;
+}
+
+th {
+  background-color: #16213e;
+  color: #d4a44a;
+  font-weight: 500;
+}
+
+tr:nth-child(even) td {
+  background-color: #111827;
+}
+
+tr:hover td {
+  background-color: #1f2b4a;
+}
+
+/* テキストエリアスタイル */
+textarea {
+  resize: vertical;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
