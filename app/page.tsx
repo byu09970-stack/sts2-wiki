@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Suspense } from "react";
 import EnemyCard from "@/components/EnemyCard";
 import enemiesData from "@/data/enemies.json";
@@ -59,9 +59,6 @@ function EnemyListContent() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [loaded, setLoaded] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const isFirstMount = useRef(true);
-
   useEffect(() => {
     setMounted(true);
     const saved = loadSession();
@@ -71,14 +68,6 @@ function EnemyListContent() {
     setSidebarOpen(saved.sidebarOpen ?? true);
     setLoaded(true);
   }, []);
-
-  useEffect(() => {
-    if (!loaded || !isFirstMount.current) return;
-    isFirstMount.current = false;
-    setTimeout(() => {
-      bottomRef.current?.scrollIntoView({ behavior: "auto" });
-    }, 80);
-  }, [loaded]);
 
   useEffect(() => {
     if (!loaded) return;
@@ -321,7 +310,6 @@ function EnemyListContent() {
           </div>
         )}
 
-        <div ref={bottomRef} />
       </div>
     </>
   );
