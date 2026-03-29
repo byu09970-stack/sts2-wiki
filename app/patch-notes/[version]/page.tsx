@@ -21,8 +21,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { version: string } }) {
-  const version = decodeURIComponent(params.version);
+export async function generateMetadata({ params }: { params: Promise<{ version: string }> }) {
+  const { version: rawVersion } = await params;
+  const version = decodeURIComponent(rawVersion);
   const note = (patchNotesData.patch_notes as PatchNote[]).find((n) => n.version === version);
   if (!note) return { title: "パッチノート | スレスパ2 攻略Wiki" };
   return {
@@ -31,8 +32,9 @@ export function generateMetadata({ params }: { params: { version: string } }) {
   };
 }
 
-export default function PatchNoteDetailPage({ params }: { params: { version: string } }) {
-  const version = decodeURIComponent(params.version);
+export default async function PatchNoteDetailPage({ params }: { params: Promise<{ version: string }> }) {
+  const { version: rawVersion } = await params;
+  const version = decodeURIComponent(rawVersion);
   const notes = patchNotesData.patch_notes as PatchNote[];
   const note = notes.find((n) => n.version === version);
   if (!note) notFound();
