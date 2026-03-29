@@ -19,7 +19,7 @@ export default function RootLayout({
             <a href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
               <span className="text-2xl">⚔️</span>
               <h1 className="text-xl font-bold" style={{ color: "#d4a44a", fontFamily: "'Noto Serif JP', serif" }}>
-                スレスパ2 攻略Wiki
+                スレスパ2 敵だけ攻略
               </h1>
             </a>
             <nav className="flex items-center gap-1 ml-2">

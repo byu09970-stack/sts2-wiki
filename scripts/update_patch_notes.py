@@ -64,6 +64,144 @@ def translate_text(client: translate.Client, text: str) -> str:
     return result["translatedText"]
 
 
+# STS2パッチノートの主要セクション名（全大文字）
+MAJOR_SECTIONS = [
+    "CONTENT", "BALANCE", "ART", "BUG FIXES", "USER INTERFACE & EXPERIENCE",
+    "USER INTERFACE", "GAMEPLAY", "AUDIO", "LOCALIZATION", "MULTIPLAYER",
+    "PERFORMANCE", "FEATURES", "FIXES", "CHANGES", "NEW FEATURES",
+]
+
+# アクション動詞（項目の先頭に来る語、大文字始まり）
+ACTION_VERBS = [
+    "Buffed", "Nerfed", "Changed", "Fixed", "Added", "Removed", "Reworked",
+    "Reverted", "Deprecated", "Increased", "Decreased", "Improved", "Updated",
+    "Disabled", "Enabled", "Replaced", "Redesigned", "Rebalanced", "Adjusted",
+    "Moved", "Disallowed", "Allowed", "Reduced", "Raised", "Lowered",
+    "Nerfed", "Redesigned", "Rebalanced",
+]
+
+# サブヘッダーとして扱わないキーワード（アクション動詞等）
+_HEADER_BLACKLIST = re.compile(
+    r'^(?:' + '|'.join(ACTION_VERBS) +
+    r'|Now|Note|Since|For|This|Additionally|Starting|If|As|The|A|An)\b'
+)
+# サブヘッダー候補に動詞が1つでも含まれていたら除外
+_CONTAINS_VERB = re.compile(r'\b(?:' + '|'.join(ACTION_VERBS) + r')\b')
+
+
+def split_into_items(text: str) -> list[str]:
+    """
+    プレーンテキストの塊をアイテム単位に分割する。
+    アクション動詞またはピリオドで区切る。
+    """
+    if not text.strip():
+        return []
+
+    # アクション動詞の前で分割（句読点がなくてもOK）
+    verb_pattern = r'\b(?:' + '|'.join(re.escape(v) for v in ACTION_VERBS) + r')\b'
+    # 文字/数字/引用符の後のアクション動詞前で分割
+    marked = re.sub(r'(?<=[a-zA-Z0-9"\'.!?])\s+(?=' + verb_pattern + r')', '\n', text)
+
+    items = []
+    for part in marked.split('\n'):
+        part = part.strip()
+        if not part or len(part) < 10:
+            continue
+        # 長すぎる説明文はピリオドでさらに分割
+        if len(part) > 400:
+            sub_parts = re.split(r'(?<=[.!?])\s+(?=[A-Z])', part)
+            for sp in sub_parts:
+                sp = sp.strip()
+                if sp and len(sp) > 10:
+                    items.append(sp)
+        else:
+            items.append(part)
+
+    return items if items else [text.strip()] if text.strip() else []
+
+
+def preprocess_contents(contents: str) -> list[tuple[str, str]]:
+    """
+    STS2パッチノートのプレーンテキストを (type, text) のリストに変換。
+    type: 'header' | 'bullet' | 'text'
+
+    Steam APIはBBCodeなしのプレーンテキストを返す。構造は:
+    - MAJOR SECTION: （全大文字、例: CONTENT:, BALANCE:）
+    - Sub Section: （キャラ名・カテゴリ名 + コロン、例: Silent:, General:）
+    - 個別項目（アクション動詞で始まる文）
+    """
+    result: list[tuple[str, str]] = []
+
+    # HTMLエンティティ変換
+    text = contents
+    text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'")
+
+    # 全大文字セクションの前にマーカーを挿入
+    major_pattern = r'\b(' + '|'.join(re.escape(s) for s in MAJOR_SECTIONS) + r'):\s'
+    text = re.sub(major_pattern, r'\n__MAJOR__\1\n', text)
+
+    chunks = re.split(r'\n__MAJOR__', text)
+
+    for i, chunk in enumerate(chunks):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+
+        if i == 0:
+            # 冒頭のイントロ文
+            intro = chunk[:500].strip()
+            if intro:
+                result.append(("text", intro))
+            continue
+
+        lines = chunk.split("\n", 1)
+        section_name = lines[0].strip()
+        body = lines[1].strip() if len(lines) > 1 else ""
+
+        result.append(("header", section_name))
+
+        if not body:
+            continue
+
+        # サブセクションの検出:
+        # 条件: 大文字始まり・最大4語・小文字接続詞(and/&)のみ許可・アクション動詞不可・40文字未満
+        sub_pattern = (
+            r'(?<!["\w])'
+            r'([A-Z][A-Za-z]*(?:\s+(?:&|and|[A-Z][A-Za-z]*)){0,3})'
+            r':\s'
+        )
+        parts = re.split(sub_pattern, body)
+
+        j = 0
+        while j < len(parts):
+            part = parts[j].strip()
+            if not part:
+                j += 1
+                continue
+
+            # サブセクション名かチェック
+            if (
+                j + 1 < len(parts)
+                and re.match(r'^[A-Z][A-Za-z]*(?:\s+(?:&|and|[A-Z][A-Za-z]*)){0,3}$', parts[j])
+                and len(parts[j]) < 40
+                and not _HEADER_BLACKLIST.match(parts[j])
+                and not _CONTAINS_VERB.search(parts[j])
+            ):
+                result.append(("header", parts[j]))
+                j += 1
+                continue
+
+            # テキスト部分を項目に分割
+            for item in split_into_items(part):
+                item = item.strip()
+                if not item:
+                    continue
+                result.append(("bullet", item))
+            j += 1
+
+    return result
+
+
 def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
     title = item.get("title", "")
     contents = item.get("contents", "")
@@ -81,63 +219,63 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
         logger.warning(f"Title translation failed: {e}")
         title_ja = title
 
-    # パッチノートを行ごとに解析してセクション分け
+    # BBCodeを正しくパースして (type, text) リストに変換
+    parsed_lines = preprocess_contents(contents)
+    logger.info(f"Parsed {len(parsed_lines)} lines (bullets: {sum(1 for t,_ in parsed_lines if t=='bullet')}, headers: {sum(1 for t,_ in parsed_lines if t=='header')})")
+
     sections: list[dict] = []
     current_section: dict | None = None
     summary_lines: list[str] = []
-    line_count = 0
 
-    for raw_line in contents.split("\n"):
-        line = raw_line.strip()
-        if not line or line.startswith("["):
-            continue
-
-        # セクションヘッダー判定（行末が:で終わる、または短くて大文字が多い）
-        is_header = (
-            (line.endswith(":") and len(line) < 60) or
-            (len(line) < 40 and line.isupper())
-        )
-
-        if is_header:
+    for line_type, line_text in parsed_lines:
+        if line_type == "header":
             if current_section and current_section["items"]:
                 sections.append(current_section)
-            heading_en = line.rstrip(":")
             try:
-                heading_ja = translate_text(client, heading_en)
+                heading_ja = translate_text(client, line_text)
             except Exception:
-                heading_ja = heading_en
+                heading_ja = line_text
             current_section = {"heading": heading_ja, "items": []}
-        elif line.startswith(("-", "*", "•")):
-            item_text = line.lstrip("-*• ").strip()
-            if item_text and len(item_text) > 3:
-                try:
-                    item_ja = translate_text(client, item_text)
-                except Exception:
-                    item_ja = item_text
-                if current_section is None:
-                    current_section = {"heading": "変更内容", "items": []}
-                current_section["items"].append(item_ja)
-                line_count += 1
-                if line_count <= 3:
-                    summary_lines.append(item_ja)
-        elif line_count == 0 and len(line) > 20:
-            # 冒頭の説明文をサマリーに使う
+
+        elif line_type == "bullet":
             try:
-                line_ja = translate_text(client, line[:300])
-                summary_lines.append(line_ja)
+                item_ja = translate_text(client, line_text)
             except Exception:
-                summary_lines.append(line[:100])
+                item_ja = line_text
+            if current_section is None:
+                current_section = {"heading": "変更内容", "items": []}
+            current_section["items"].append(item_ja)
+            if len(summary_lines) < 3:
+                summary_lines.append(item_ja)
+
+        elif line_type == "text":
+            # 箇条書きがまだ始まっていない場合、冒頭説明文としてサマリーに使う
+            if not any(t == "bullet" for t, _ in parsed_lines[:parsed_lines.index((line_type, line_text)) + 1]):
+                if len(summary_lines) < 2:
+                    try:
+                        line_ja = translate_text(client, line_text[:300])
+                        summary_lines.append(line_ja)
+                    except Exception:
+                        summary_lines.append(line_text[:150])
+            # セクションの説明文として追加
+            elif current_section is not None and not current_section["items"]:
+                try:
+                    line_ja = translate_text(client, line_text[:300])
+                    current_section["items"].append(line_ja)
+                except Exception:
+                    pass
 
     if current_section and current_section["items"]:
         sections.append(current_section)
 
     # セクションが空の場合、全体を1セクションに
     if not sections:
+        logger.warning(f"No sections parsed for {version}, falling back to raw content")
         try:
             overall_ja = translate_text(client, contents[:2000])
-            sections = [{"heading": "変更内容", "items": [overall_ja[:500]]}]
+            sections = [{"heading": "変更内容", "items": [overall_ja]}]
         except Exception:
-            sections = [{"heading": "変更内容", "items": [contents[:200]]}]
+            sections = [{"heading": "変更内容", "items": [contents[:500]]}]
 
     summary_ja = "　".join(summary_lines[:3]) if summary_lines else title_ja
 
@@ -159,15 +297,16 @@ def rebuild_site() -> bool:
     try:
         logger.info("Building Next.js site...")
         result = subprocess.run(
-            ["npm", "run", "build"],
+            "npm run build",
             cwd=REPO_ROOT,
             capture_output=True, text=True, timeout=300,
+            shell=True,
         )
         if result.returncode != 0:
             logger.error(f"Build failed:\n{result.stderr[-2000:]}")
             return False
         logger.info("Build succeeded")
-        subprocess.run(["pm2", "restart", "sts2-wiki"], check=True, timeout=30)
+        subprocess.run("pm2 restart sts2-wiki", check=True, timeout=30, shell=True)
         logger.info("PM2 restarted")
         return True
     except Exception as e:
@@ -176,6 +315,9 @@ def rebuild_site() -> bool:
 
 
 def main() -> None:
+    # --reparse オプション: 既存データも含めて全件再処理（BBCode修正後の再取得用）
+    reparse_all = "--reparse" in sys.argv
+
     translate_client = translate.Client()
 
     logger.info("Steam APIからニュースを取得中...")
@@ -188,7 +330,10 @@ def main() -> None:
     logger.info(f"取得件数: {len(steam_items)}")
 
     data = load_existing()
-    existing_gids = {n["gid"] for n in data["patch_notes"]}
+    existing_gids = set() if reparse_all else {n["gid"] for n in data["patch_notes"]}
+
+    if reparse_all:
+        logger.info("--reparse モード: 全件再処理します")
 
     new_notes = []
     for item in steam_items:
@@ -197,19 +342,26 @@ def main() -> None:
             logger.debug(f"Skip (already exists): {item.get('title')}")
             continue
 
-        logger.info(f"新しいパッチノートを処理中: {item.get('title')}")
+        logger.info(f"パッチノートを処理中: {item.get('title')}")
         parsed = parse_patch_note(item, translate_client)
         if parsed:
             new_notes.append(parsed)
-            logger.info(f"処理完了: {parsed['version']}")
+            logger.info(f"処理完了: {parsed['version']} (セクション数: {len(parsed['sections'])}, 合計項目数: {sum(len(s['items']) for s in parsed['sections'])})")
 
     if not new_notes:
         logger.info("新しいパッチノートはありませんでした。")
         return
 
-    data["patch_notes"] = new_notes + data["patch_notes"]
+    if reparse_all:
+        # 再処理時は既存を新データで上書き（gidで照合）
+        new_gids = {n["gid"] for n in new_notes}
+        kept = [n for n in data["patch_notes"] if n["gid"] not in new_gids]
+        data["patch_notes"] = new_notes + kept
+    else:
+        data["patch_notes"] = new_notes + data["patch_notes"]
+
     save_data(data)
-    logger.info(f"{len(new_notes)}件の新しいパッチノートを追加しました。")
+    logger.info(f"{len(new_notes)}件のパッチノートを{'再処理' if reparse_all else '追加'}しました。")
 
     if rebuild_site():
         logger.info("サイトの更新が完了しました。")
