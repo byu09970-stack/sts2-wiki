@@ -64,20 +64,21 @@ ENEMY_ID_MAP: dict[str, str | None] = {
     "FLAIL_KNIGHT": "knight-trio",
     "SPECTRAL_KNIGHT": None,
     "MAGI_KNIGHT": None,
-    # Bowlbug 個別
-    "BOWLBUG_EGG": "bowlbug-duo",
+    # Bowlbug 個別 → すべてスキップ（複合HPで個別更新不可）
+    "BOWLBUG_EGG": None,
     "BOWLBUG_ROCK": None,
     "BOWLBUG_SILK": None,
     "BOWLBUG_NECTAR": None,
     # Queen + Torch Head
     "TORCH_HEAD_AMALGAM": None,  # queen に含まれる
-    # Doormaker パーツ
+    # Doormaker → スキップ（複合HP）
+    "DOORMAKER": None,
     "ROCKET": None,
-    # Living Shield + Turret
-    "LIVING_SHIELD": "living-shield-turret-operator",
+    # Living Shield + Turret → スキップ（複合HP）
+    "LIVING_SHIELD": None,
     "TURRET_OPERATOR": None,
-    # The Lost + The Forgotten
-    "THE_LOST": "the-lost-the-forgotten",
+    # The Lost + The Forgotten → スキップ（複合HP）
+    "THE_LOST": None,
     "THE_FORGOTTEN": None,
     # Punch + Cubex combo (act3)
     "PUNCH_CONSTRUCT": "punch-construct",  # act1b standalone
@@ -93,7 +94,7 @@ ENEMY_ID_MAP: dict[str, str | None] = {
     "BYRDONIS_NEST": None,
     "BYRDPIP": None,
     "KIN_FOLLOWER": None,
-    "DECIMILLIPEDE_SEGMENT": "decimillipede",
+    "DECIMILLIPEDE_SEGMENT": None,  # 複合HP
     "SNAPPING_JAXFRUIT": None,
     "SLITHERING_STRANGLER": None,
     "GAS_BOMB": None,
@@ -105,6 +106,16 @@ ENEMY_ID_MAP: dict[str, str | None] = {
     "CRUSHER": None,
     "SLUMBERING_BEETLE": None,
     "ARCHITECT": None,
+}
+
+# 複合敵のIDリスト（HP比較をスキップする。個別モンスターのHPで上書きしない）
+COMPOSITE_ENEMY_IDS = {
+    "raider-trio", "slime-pack", "slime-trio", "cultists", "knight-trio",
+    "bowlbug-duo", "bowlbug-trio", "living-shield-turret-operator",
+    "the-lost-the-forgotten", "punch-construct-cubex-constructs",
+    "doormaker", "decimillipede", "kaiser-crab", "nibbit-duo",
+    "corpse-slugs", "exoskeleton-pack", "exoskeleton-trio",
+    "scroll-of-biting-pack", "scroll-of-biting-trio",
 }
 
 # Act マッピング
@@ -277,9 +288,12 @@ def compare_and_update(
 
         enemy_changes: list[str] = []
 
+        # 複合敵はHP比較をスキップ（個別モンスターのHPで上書きしない）
+        is_composite = enemy_id in COMPOSITE_ENEMY_IDS
+
         # HP比較
         scraped_hp = matched.get("hp_text")
-        if scraped_hp:
+        if scraped_hp and not is_composite:
             current_hp = enemy.get("hp", "")
             # 数値のみ抽出して比較
             scraped_nums = re.findall(r"\d+", scraped_hp)
