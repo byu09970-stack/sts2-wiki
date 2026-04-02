@@ -253,7 +253,7 @@
       "biome": "繁茂の地",
       "biomeEn": "Overgrowth",
       "type": "elite",
-      "hp": "93",
+      "hp": "91-94",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Byrdonis.png",
       "abilities": [
         {
@@ -1058,7 +1058,7 @@
       "biome": "地下水路",
       "biomeEn": "Underdocks",
       "type": "boss",
-      "hp": "250",
+      "hp": "240-240",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Waterfall_Giant.png",
       "abilities": [
         {
@@ -1119,7 +1119,7 @@
       "biome": "地下水路",
       "biomeEn": "Underdocks",
       "type": "elite",
-      "hp": "28〜32×複数",
+      "hp": "26-31",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Phantasmal_Gardener.png",
       "abilities": [
         {
@@ -1168,7 +1168,7 @@
       "biome": "地下水路",
       "biomeEn": "Underdocks",
       "type": "elite",
-      "hp": "79",
+      "hp": "74-74",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Skulking_Colony.png",
       "abilities": [
         {
@@ -1954,7 +1954,7 @@
       "biome": "魔窟",
       "biomeEn": "Hive",
       "type": "elite",
-      "hp": "各セグメント: 42-48 (A8: 48-56) × 3セグメント",
+      "hp": "40-46",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Decimillipede.png",
       "abilities": [
         {
@@ -2099,7 +2099,7 @@
       "biome": "魔窟",
       "biomeEn": "Hive",
       "type": "normal",
-      "hp": "ロック45-48 / エッグ21-22 / シルク40-43 / ネクター35-38 (A8各+1-2)",
+      "hp": "21-22",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Bowlbug_%28Rock%29.png",
       "abilities": [
         {
@@ -2675,7 +2675,7 @@
       "biome": "栄光の路",
       "biomeEn": "Glory",
       "type": "boss",
-      "hp": "ドア: 155 (A8: 165) / ドアメーカー本体: 489 (A8: 512)",
+      "hp": "489-489",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Doormaker.png",
       "abilities": [
         {
