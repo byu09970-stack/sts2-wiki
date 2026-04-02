@@ -31,6 +31,10 @@ export default function RootLayout({
                 style={{ color: "#9aa0a8", border: "1px solid transparent" }}>
                 📋 パッチノート
               </a>
+              <a href="/updates" className="text-xs px-3 py-1.5 rounded transition-colors hover:opacity-80 hover:border-slate-600"
+                style={{ color: "#9aa0a8", border: "1px solid transparent" }}>
+                🔄 更新履歴
+              </a>
             </nav>
           </div>
         </header>
