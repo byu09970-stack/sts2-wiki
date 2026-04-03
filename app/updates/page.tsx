@@ -19,8 +19,11 @@ const TYPE_LABELS: Record<string, { label: string; color: string; bg: string; bo
   new_enemy: { label: "新規追加", color: "#60c060", bg: "#102a10", border: "#1a4a1a" },
 };
 
+const MAX_VISIBLE_UPDATES = 10;
+
 export default function UpdatesPage() {
-  const updates = updateLogData.updates as UpdateEntry[];
+  const allUpdates = updateLogData.updates as UpdateEntry[];
+  const updates = allUpdates.slice(0, MAX_VISIBLE_UPDATES);
 
   // 日付でグループ化
   const grouped = updates.reduce<Record<string, UpdateEntry[]>>((acc, entry) => {
@@ -47,7 +50,7 @@ export default function UpdatesPage() {
             className="text-xs px-2 py-1 rounded"
             style={{ backgroundColor: "#111827", color: "#606070", border: "1px solid #2a3050" }}
           >
-            全{updates.length}件
+            最新{updates.length}件 / 全{allUpdates.length}件
           </span>
         )}
       </div>

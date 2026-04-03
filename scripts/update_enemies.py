@@ -15,10 +15,13 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 from google.cloud import translate_v2 as translate
+
+from text_normalize import normalize_heading_text, normalize_patch_note_text
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("sts2_enemy_updater")
@@ -27,6 +30,7 @@ REPO_ROOT = Path(__file__).parent.parent
 ENEMIES_FILE = REPO_ROOT / "data" / "enemies.json"
 UPDATE_LOG_FILE = REPO_ROOT / "data" / "update-log.json"
 PATCH_NOTES_FILE = REPO_ROOT / "data" / "patch-notes.json"
+JST = ZoneInfo("Asia/Tokyo")
 
 BASE_URL = "https://slaythespire2.gg"
 ENEMIES_LIST_URL = f"{BASE_URL}/enemies"
@@ -361,13 +365,17 @@ def check_patch_note_changes() -> list[str]:
 
     relevant_items: list[str] = []
     for section in latest.get("sections", []):
-        heading = section.get("heading", "").lower()
+        heading = normalize_heading_text(section.get("heading", "")).lower()
         if any(kw in heading for kw in balance_keywords):
-            relevant_items.extend(section.get("items", []))
+            relevant_items.extend(
+                normalize_patch_note_text(item)
+                for item in section.get("items", [])
+            )
             continue
         for item in section.get("items", []):
-            if any(kw in item.lower() for kw in balance_keywords):
-                relevant_items.append(item)
+            normalized_item = normalize_patch_note_text(item)
+            if any(kw in normalized_item.lower() for kw in balance_keywords):
+                relevant_items.append(normalized_item)
 
     return relevant_items[:20]
 
@@ -380,14 +388,28 @@ def save_update_log(changes: list[dict], patch_changes: list[str]) -> None:
     except (FileNotFoundError, json.JSONDecodeError):
         log_data = {"updates": []}
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(JST).strftime("%Y-%m-%d")
+
+    updates = log_data.get("updates", [])
+
+    def insert_entry(entry: dict) -> None:
+        normalized_entry = {
+            "date": entry["date"],
+            "type": entry["type"],
+            "summary": normalize_patch_note_text(entry["summary"]),
+            "details": [normalize_patch_note_text(detail) for detail in entry["details"]],
+            "source": normalize_patch_note_text(entry["source"]),
+        }
+        if updates and updates[0] == normalized_entry:
+            return
+        updates.insert(0, normalized_entry)
 
     if changes:
         details = []
         for c in changes:
             for ch in c["changes"]:
                 details.append(f"{c['name']}({c['nameEn']}): {ch}")
-        log_data["updates"].insert(0, {
+        insert_entry({
             "date": today,
             "type": "enemy_update",
             "summary": f"{len(changes)}体の敵データを更新",
@@ -396,7 +418,7 @@ def save_update_log(changes: list[dict], patch_changes: list[str]) -> None:
         })
 
     if patch_changes:
-        log_data["updates"].insert(0, {
+        insert_entry({
             "date": today,
             "type": "patch_note",
             "summary": "パッチノートのバランス変更を検出",
@@ -405,7 +427,7 @@ def save_update_log(changes: list[dict], patch_changes: list[str]) -> None:
         })
 
     # 最新100件のみ保持
-    log_data["updates"] = log_data["updates"][:100]
+    log_data["updates"] = updates[:100]
 
     with open(UPDATE_LOG_FILE, "w", encoding="utf-8") as f:
         json.dump(log_data, f, ensure_ascii=False, indent=2)

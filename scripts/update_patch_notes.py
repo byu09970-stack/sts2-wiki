@@ -17,6 +17,8 @@ from pathlib import Path
 import requests
 from google.cloud import translate_v2 as translate
 
+from text_normalize import normalize_heading_text, normalize_patch_note_text, normalize_source_text
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("sts2_updater")
 
@@ -61,7 +63,15 @@ def translate_text(client: translate.Client, text: str) -> str:
     if not text.strip():
         return text
     result = client.translate(text, source_language="en", target_language="ja")
-    return result["translatedText"]
+    return normalize_patch_note_text(result["translatedText"])
+
+
+def translate_heading(client: translate.Client, text: str) -> str:
+    """見出しは既知のセクション名を優先し、未定義だけ翻訳する。"""
+    normalized = normalize_heading_text(text)
+    if normalized != normalize_patch_note_text(text):
+        return normalized
+    return normalize_heading_text(translate_text(client, text))
 
 
 # STS2パッチノートの主要セクション名（全大文字）
@@ -132,9 +142,7 @@ def preprocess_contents(contents: str) -> list[tuple[str, str]]:
     """
     result: list[tuple[str, str]] = []
 
-    # HTMLエンティティ変換
-    text = contents
-    text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'")
+    text = normalize_source_text(contents)
 
     # 全大文字セクションの前にマーカーを挿入
     major_pattern = r'\b(' + '|'.join(re.escape(s) for s in MAJOR_SECTIONS) + r'):\s'
@@ -155,8 +163,8 @@ def preprocess_contents(contents: str) -> list[tuple[str, str]]:
             continue
 
         lines = chunk.split("\n", 1)
-        section_name = lines[0].strip()
-        body = lines[1].strip() if len(lines) > 1 else ""
+        section_name = normalize_heading_text(lines[0])
+        body = normalize_source_text(lines[1]) if len(lines) > 1 else ""
 
         result.append(("header", section_name))
 
@@ -187,7 +195,7 @@ def preprocess_contents(contents: str) -> list[tuple[str, str]]:
                 and not _HEADER_BLACKLIST.match(parts[j])
                 and not _CONTAINS_VERB.search(parts[j])
             ):
-                result.append(("header", parts[j]))
+                result.append(("header", normalize_heading_text(parts[j])))
                 j += 1
                 continue
 
@@ -196,7 +204,7 @@ def preprocess_contents(contents: str) -> list[tuple[str, str]]:
                 item = item.strip()
                 if not item:
                     continue
-                result.append(("bullet", item))
+                result.append(("bullet", normalize_patch_note_text(item)))
             j += 1
 
     return result
@@ -204,7 +212,7 @@ def preprocess_contents(contents: str) -> list[tuple[str, str]]:
 
 def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
     title = item.get("title", "")
-    contents = item.get("contents", "")
+    contents = normalize_source_text(item.get("contents", ""))
     date_unix = item.get("date", 0)
     date_str = datetime.fromtimestamp(date_unix, tz=timezone.utc).strftime("%Y-%m-%d")
 
@@ -217,7 +225,7 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
         logger.info(f"Translated title: {title_ja}")
     except Exception as e:
         logger.warning(f"Title translation failed: {e}")
-        title_ja = title
+        title_ja = normalize_patch_note_text(title)
 
     # BBCodeを正しくパースして (type, text) リストに変換
     parsed_lines = preprocess_contents(contents)
@@ -232,16 +240,16 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
             if current_section and current_section["items"]:
                 sections.append(current_section)
             try:
-                heading_ja = translate_text(client, line_text)
+                heading_ja = translate_heading(client, line_text)
             except Exception:
-                heading_ja = line_text
+                heading_ja = normalize_heading_text(line_text)
             current_section = {"heading": heading_ja, "items": []}
 
         elif line_type == "bullet":
             try:
                 item_ja = translate_text(client, line_text)
             except Exception:
-                item_ja = line_text
+                item_ja = normalize_patch_note_text(line_text)
             if current_section is None:
                 current_section = {"heading": "変更内容", "items": []}
             current_section["items"].append(item_ja)
@@ -256,7 +264,7 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
                         line_ja = translate_text(client, line_text[:300])
                         summary_lines.append(line_ja)
                     except Exception:
-                        summary_lines.append(line_text[:150])
+                        summary_lines.append(normalize_patch_note_text(line_text[:150]))
             # セクションの説明文として追加
             elif current_section is not None and not current_section["items"]:
                 try:
@@ -275,14 +283,15 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
             overall_ja = translate_text(client, contents[:2000])
             sections = [{"heading": "変更内容", "items": [overall_ja]}]
         except Exception:
-            sections = [{"heading": "変更内容", "items": [contents[:500]]}]
+            sections = [{"heading": "変更内容", "items": [normalize_patch_note_text(contents[:500])]}]
 
-    summary_ja = "　".join(summary_lines[:3]) if summary_lines else title_ja
+    summary_ja = " / ".join(summary_lines[:3]) if summary_lines else title_ja
+    summary_ja = normalize_patch_note_text(summary_ja)
 
     return {
         "gid": str(item.get("gid", "")),
         "version": version,
-        "title": title,
+        "title": normalize_patch_note_text(title),
         "title_ja": title_ja,
         "date": date_str,
         "date_unix": date_unix,
