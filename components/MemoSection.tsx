@@ -1,18 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function MemoSection({ enemyId }: { enemyId: string }) {
   const [memo, setMemo] = useState("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const saveResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem(`memo_${enemyId}`);
     const storedAt = localStorage.getItem(`memo_${enemyId}_at`);
-    if (stored) setMemo(stored);
-    if (storedAt) setSavedAt(storedAt);
+    setMemo(stored ?? "");
+    setSavedAt(storedAt ?? null);
+    setSaved(false);
   }, [enemyId]);
+
+  useEffect(() => {
+    return () => {
+      if (saveResetTimerRef.current) {
+        clearTimeout(saveResetTimerRef.current);
+        saveResetTimerRef.current = null;
+      }
+    };
+  }, []);
 
   const handleSave = () => {
     const now = new Date().toLocaleString("ja-JP");
@@ -20,7 +31,13 @@ export default function MemoSection({ enemyId }: { enemyId: string }) {
     localStorage.setItem(`memo_${enemyId}_at`, now);
     setSavedAt(now);
     setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    if (saveResetTimerRef.current) {
+      clearTimeout(saveResetTimerRef.current);
+    }
+    saveResetTimerRef.current = setTimeout(() => {
+      setSaved(false);
+      saveResetTimerRef.current = null;
+    }, 2000);
   };
 
   const handleClear = () => {
