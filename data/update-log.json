@@ -1,6 +1,24 @@
 {
   "updates": [
     {
+      "date": "2026-04-05",
+      "type": "patch_note",
+      "summary": "パッチノートのバランス変更を検出",
+      "details": [
+        "Reworked Blade of Ink card: \"Rare - Cost 1 - Skill | This turn, whenever you play an Attack, gain 2(3) Strength this turn.\" -> \"Rare - Cost 1 - Skill - Add 2(3) Inky Shivs into your Hand.\"",
+        "Added new Inky enchantment: \"This card deals 2 additional damage and applies 1 Weak.\" The Blade of Ink rework is an experiment with generating Enchanted cards mid combat. Definitely let us know how this feels or if Enchantments are best left to things like Events and Relics. I suspect this card will be high impact, and gives Silent another strong Weak applier.",
+        "Buffed Leading Strike",
+        "Shivs increased from 1 -> 2 Damage decreased from 7 -> 3",
+        "Nerfed Speedster",
+        "damage decreased from 2(3) -> 1(2)",
+        "Nerfed Untouchable",
+        "Buffed Skulking Colony",
+        "Now attacks on all turns Deals slightly more damage",
+        "Buffed Nonupeipe's Fur Coat relic: now affects restocked Axebots and other enemies that enter combat during a fight"
+      ],
+      "source": "Steam"
+    },
+    {
       "date": "2026-04-04",
       "type": "patch_note",
       "summary": "パッチノートのバランス変更を検出",
