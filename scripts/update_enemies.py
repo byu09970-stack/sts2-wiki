@@ -459,14 +459,15 @@ def rebuild_site() -> bool:
 def git_push_changes(changes: list[dict]) -> bool:
     """変更をgit commit & pushする"""
     try:
-        # リモートの変更を先に取り込む
-        subprocess.run(
-            ["git", "pull", "--rebase", "origin", "master"],
-            cwd=REPO_ROOT, check=True, timeout=60,
-        )
+        # まずaddしてからrebase（unstaged changesがあるとrebaseが失敗するため）
         subprocess.run(
             ["git", "add", "data/enemies.json", "data/update-log.json"],
             cwd=REPO_ROOT, check=True, timeout=30,
+        )
+        # リモートの変更を取り込む（staged changesはrebase後も保持される）
+        subprocess.run(
+            ["git", "pull", "--rebase", "origin", "master"],
+            cwd=REPO_ROOT, check=True, timeout=60,
         )
         summary = f"{len(changes)}体の敵データを更新" if changes else "定期更新チェック"
         date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")

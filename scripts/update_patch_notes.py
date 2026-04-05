@@ -305,14 +305,15 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
 def git_push_changes(new_notes: list[dict]) -> bool:
     """patch-notes.jsonをgit commit & pushする"""
     try:
-        # リモートの変更を先に取り込む
-        subprocess.run(
-            ["git", "pull", "--rebase", "origin", "master"],
-            cwd=REPO_ROOT, check=True, timeout=60,
-        )
+        # まずaddしてからrebase（unstaged changesがあるとrebaseが失敗するため）
         subprocess.run(
             ["git", "add", "data/patch-notes.json"],
             cwd=REPO_ROOT, check=True, timeout=30,
+        )
+        # リモートの変更を取り込む（staged changesはrebase後も保持される）
+        subprocess.run(
+            ["git", "pull", "--rebase", "origin", "master"],
+            cwd=REPO_ROOT, check=True, timeout=60,
         )
         summary = f"{len(new_notes)}件のパッチノートを追加" if new_notes else "パッチノート定期チェック"
         date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
