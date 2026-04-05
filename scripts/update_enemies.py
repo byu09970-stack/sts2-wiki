@@ -459,6 +459,11 @@ def rebuild_site() -> bool:
 def git_push_changes(changes: list[dict]) -> bool:
     """変更をgit commit & pushする"""
     try:
+        # リモートの変更を先に取り込む
+        subprocess.run(
+            ["git", "pull", "--rebase", "origin", "master"],
+            cwd=REPO_ROOT, check=True, timeout=60,
+        )
         subprocess.run(
             ["git", "add", "data/enemies.json", "data/update-log.json"],
             cwd=REPO_ROOT, check=True, timeout=30,

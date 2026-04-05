@@ -302,6 +302,42 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
     }
 
 
+def git_push_changes(new_notes: list[dict]) -> bool:
+    """patch-notes.jsonをgit commit & pushする"""
+    try:
+        # リモートの変更を先に取り込む
+        subprocess.run(
+            ["git", "pull", "--rebase", "origin", "master"],
+            cwd=REPO_ROOT, check=True, timeout=60,
+        )
+        subprocess.run(
+            ["git", "add", "data/patch-notes.json"],
+            cwd=REPO_ROOT, check=True, timeout=30,
+        )
+        summary = f"{len(new_notes)}件のパッチノートを追加" if new_notes else "パッチノート定期チェック"
+        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        msg = f"auto: {date_str} {summary}"
+        result = subprocess.run(
+            ["git", "commit", "-m", msg],
+            cwd=REPO_ROOT, capture_output=True, text=True, timeout=30,
+        )
+        if result.returncode != 0:
+            if "nothing to commit" in result.stdout + result.stderr:
+                logger.info("コミットする変更なし")
+                return True
+            logger.error(f"git commit失敗: {result.stderr}")
+            return False
+        subprocess.run(
+            ["git", "push"],
+            cwd=REPO_ROOT, check=True, timeout=60,
+        )
+        logger.info("git push完了")
+        return True
+    except Exception as e:
+        logger.error(f"git push失敗: {e}")
+        return False
+
+
 def rebuild_site() -> bool:
     try:
         logger.info("Building Next.js site...")
@@ -371,6 +407,11 @@ def main() -> None:
 
     save_data(data)
     logger.info(f"{len(new_notes)}件のパッチノートを{'再処理' if reparse_all else '追加'}しました。")
+
+    if git_push_changes(new_notes):
+        logger.info("GitHub へプッシュ完了")
+    else:
+        logger.error("git push失敗。手動確認してください。")
 
     if rebuild_site():
         logger.info("サイトの更新が完了しました。")
