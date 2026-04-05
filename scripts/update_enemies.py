@@ -459,15 +459,9 @@ def rebuild_site() -> bool:
 def git_push_changes(changes: list[dict]) -> bool:
     """変更をgit commit & pushする"""
     try:
-        # まずaddしてからrebase（unstaged changesがあるとrebaseが失敗するため）
         subprocess.run(
             ["git", "add", "data/enemies.json", "data/update-log.json"],
             cwd=REPO_ROOT, check=True, timeout=30,
-        )
-        # リモートの変更を取り込む（staged changesはrebase後も保持される）
-        subprocess.run(
-            ["git", "pull", "--rebase", "origin", "master"],
-            cwd=REPO_ROOT, check=True, timeout=60,
         )
         summary = f"{len(changes)}体の敵データを更新" if changes else "定期更新チェック"
         date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -481,6 +475,16 @@ def git_push_changes(changes: list[dict]) -> bool:
                 logger.info("コミットする変更なし")
                 return True
             logger.error(f"git commit失敗: {result.stderr}")
+            return False
+        # commitが済んでからrebase（uncommitted changesがないのでrebaseが通る）
+        try:
+            subprocess.run(
+                ["git", "pull", "--rebase", "origin", "master"],
+                cwd=REPO_ROOT, check=True, timeout=60,
+            )
+        except subprocess.CalledProcessError as e:
+            logger.error(f"git rebase失敗: {e}")
+            subprocess.run(["git", "rebase", "--abort"], cwd=REPO_ROOT, timeout=30)
             return False
         subprocess.run(
             ["git", "push"],

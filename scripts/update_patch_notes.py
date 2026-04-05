@@ -305,15 +305,9 @@ def parse_patch_note(item: dict, client: translate.Client) -> dict | None:
 def git_push_changes(new_notes: list[dict]) -> bool:
     """patch-notes.jsonをgit commit & pushする"""
     try:
-        # まずaddしてからrebase（unstaged changesがあるとrebaseが失敗するため）
         subprocess.run(
             ["git", "add", "data/patch-notes.json"],
             cwd=REPO_ROOT, check=True, timeout=30,
-        )
-        # リモートの変更を取り込む（staged changesはrebase後も保持される）
-        subprocess.run(
-            ["git", "pull", "--rebase", "origin", "master"],
-            cwd=REPO_ROOT, check=True, timeout=60,
         )
         summary = f"{len(new_notes)}件のパッチノートを追加" if new_notes else "パッチノート定期チェック"
         date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -327,6 +321,16 @@ def git_push_changes(new_notes: list[dict]) -> bool:
                 logger.info("コミットする変更なし")
                 return True
             logger.error(f"git commit失敗: {result.stderr}")
+            return False
+        # commitが済んでからrebase（uncommitted changesがないのでrebaseが通る）
+        try:
+            subprocess.run(
+                ["git", "pull", "--rebase", "origin", "master"],
+                cwd=REPO_ROOT, check=True, timeout=60,
+            )
+        except subprocess.CalledProcessError as e:
+            logger.error(f"git rebase失敗: {e}")
+            subprocess.run(["git", "rebase", "--abort"], cwd=REPO_ROOT, timeout=30)
             return False
         subprocess.run(
             ["git", "push"],
