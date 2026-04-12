@@ -253,7 +253,7 @@
       "biome": "繁茂の地",
       "biomeEn": "Overgrowth",
       "type": "elite",
-      "hp": "91-94",
+      "hp": "81-84",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Byrdonis.png",
       "abilities": [
         {
@@ -1168,7 +1168,7 @@
       "biome": "地下水路",
       "biomeEn": "Underdocks",
       "type": "elite",
-      "hp": "74-74",
+      "hp": "70-70",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Skulking_Colony.png",
       "abilities": [
         {
