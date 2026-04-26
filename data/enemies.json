@@ -3101,7 +3101,7 @@
       "biome": "栄光の路",
       "biomeEn": "Glory",
       "type": "normal",
-      "hp": "40-44 (A8: 42-46) ×2体（+召喚分）",
+      "hp": "70-78",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Axebot.png",
       "abilities": [
         {
@@ -3393,7 +3393,7 @@
       "biome": "栄光の路",
       "biomeEn": "Glory",
       "type": "normal",
-      "hp": "234 (A8: 243)",
+      "hp": "231-231",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Owl_Magistrate.png",
       "abilities": [
         {
@@ -3549,7 +3549,7 @@
       "biome": "栄光の路",
       "biomeEn": "Glory",
       "type": "normal",
-      "hp": "266 (A8: 276)",
+      "hp": "261-261",
       "imageUrl": "https://slaythespire.wiki.gg/images/StS2_Slimed_Berserker.png",
       "abilities": [],
       "phases": [
